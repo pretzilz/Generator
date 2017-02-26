@@ -9,6 +9,17 @@ public class Generator {
         frame.add(new PolygonPanel(), BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
+
+        //getTNandBN(n);
+        //generate();
+        
+    }
+
+    /*
+        Page 6, Snoeyink/Zhu
+        This function will get the TN and BN(?) based on the number of vertices designated.
+    */
+    public int getTNandBN (int n) {
         
     }
 }

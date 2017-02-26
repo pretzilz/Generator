@@ -2,6 +2,7 @@ package PolygonGenerator;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.*;
 class PolygonPanel extends JPanel {
 
     public PolygonPanel() {
@@ -11,6 +12,6 @@ class PolygonPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawLine(10, 10, 20, 20);
+        g.drawLine(10, 10, 10, 30);
     }
 }
