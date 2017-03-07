@@ -10,8 +10,8 @@ public class Generator {
         frame.pack();
         frame.setVisible(true);
 
+        generate();
         //getTNandBN(n);
-        //generate();
         
     }
 
@@ -20,6 +20,10 @@ public class Generator {
         This function will get the TN and BN(?) based on the number of vertices designated.
     */
     public int getTNandBN (int n) {
-        
+        return 0;
+    }
+
+    public static void generate() {
+        Polygon poly = new Polygon(50);
     }
 }

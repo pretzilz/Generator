@@ -1,7 +1,9 @@
 package PolygonGenerator;
-public class Vertex {
-    double xCoordinate;
-    double yCoordinate;
+
+import java.util.Random;
+public class Vertex implements Comparable<Vertex> {
+    int xCoordinate;
+    int yCoordinate;
 
     //pg 282
     //Vertex upc;
@@ -9,15 +11,24 @@ public class Vertex {
 
     //ArrayList<Vertex> aboveVisible;
     //ArrayList<Vertex> belowVisible;
-    public Vertex(double x, double y) {
-        this.xCoordinate = x;
-        this.yCoordinate = y;
+    public Vertex() {
+        Random rand = new Random();
+        this.xCoordinate = rand.nextInt(500) + 1;   //somewhere in the 500x500 expanse. we can set this to a variable later for variable window size.
+        this.yCoordinate = rand.nextInt(500) + 1;
         //this.aboveVisible = new ArrayList<Vertex>();
         //this.belowVisible = new Arraylist<Vertex>();
     }
 
-    public void setCoordinates(double x, double y) {
+    public void setCoordinates(int x, int y) {
         this.xCoordinate = x;
         this.yCoordinate = y;
+    }
+
+    public int compareTo(Vertex right) {
+        return Integer.compare(this.xCoordinate, right.xCoordinate);
+    }
+
+    public String toString() {
+        return "(" + this.xCoordinate + ", " + this.yCoordinate + ")";
     }
 }
