@@ -6,11 +6,9 @@ public class Generator {
         JFrame frame = new JFrame("Generator");
         frame.setLocation(300, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new PolygonPanel(), BorderLayout.CENTER);
+        generate(frame);
         frame.pack();
         frame.setVisible(true);
-
-        generate();
         //getTNandBN(n);
         
     }
@@ -23,7 +21,9 @@ public class Generator {
         return 0;
     }
 
-    public static void generate() {
+    public static void generate(JFrame frame) {
         Polygon poly = new Polygon(50);
+        PolygonPanel p = new PolygonPanel(poly);
+        frame.add(p, BorderLayout.CENTER);
     }
 }
