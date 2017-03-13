@@ -1,7 +1,6 @@
 package PolygonGenerator;
 import java.util.*;
 public class Polygon {
-
     public ArrayList<Vertex> Vertices;  //this needs to be sorted by x coordinate
     public int numVertices;
     public Polygon(int numVertices) {
@@ -18,20 +17,27 @@ public class Polygon {
             }
         });
 
-        for (int i = 0; i < this.Vertices.size(); i++) {
+        /*for (int i = 0; i < this.Vertices.size(); i++) {
             System.out.println(this.Vertices.get(i).toString());
-        }
+        }*/
     }
 
     public Vertex getVertex(int index) {
         return this.Vertices.get(index);
     }
 
-    public void Make_top() {
 
+    //VISIBLITY SET HELPERS ==================================
+    //Page 11
+    public Make_Vt(int i) {
+        //t = tmp;
+        //Make_top(i - 1, i, )
+        //this.Vertices.get(i).setUpperChild(tmp.getSibling());
     }
-
-    public void Make_bottom() {
-
+    
+    public Make_Vb(int i) {
+        //t = tmp;
+        //Make_bot(i - 1, i, )
+        //this.Vertices.get(i).setLowerChild(tmp.getSibling());
     }
 }

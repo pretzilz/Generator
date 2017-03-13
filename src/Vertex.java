@@ -5,18 +5,15 @@ public class Vertex implements Comparable<Vertex> {
     private int xCoordinate;
     private int yCoordinate;
 
-    //pg 282
-    //Vertex upc;
-    //Vertex sib;
+    //Visiblity set things
+    private Vertex upperChild;
+    private Vertex lowerChild;
+    private Vertex sibling;
 
-    //ArrayList<Vertex> aboveVisible;
-    //ArrayList<Vertex> belowVisible;
     public Vertex() {
         Random rand = new Random();
         this.xCoordinate = rand.nextInt(500) + 1;   //somewhere in the 500x500 expanse. we can set this to a variable later for variable window size.
         this.yCoordinate = rand.nextInt(500) + 1;
-        //this.aboveVisible = new ArrayList<Vertex>();
-        //this.belowVisible = new Arraylist<Vertex>();
     }
 
     public void setCoordinates(int x, int y) {
@@ -32,6 +29,8 @@ public class Vertex implements Comparable<Vertex> {
         return this.yCoordinate;
     }
 
+    
+
     public int compareTo(Vertex right) {
         return Integer.compare(this.xCoordinate, right.xCoordinate);
     }
@@ -39,4 +38,24 @@ public class Vertex implements Comparable<Vertex> {
     public String toString() {
         return "(" + this.xCoordinate + ", " + this.yCoordinate + ")";
     }
+
+
+    //VISIBILITY SET HELPERS===============================
+    public void setUpperChild(Vertex v) {
+        this.upperChild = v;
+    }
+
+    public void setLowerChild(Vertex v) {
+        this.lowerChild = v;
+    }
+
+    public void setSibling(Vertex v) {
+        this.sibling = v;
+    }
+
+    public Vertex getSibling() {
+        return this.sibling;
+    }
+
+
 }
