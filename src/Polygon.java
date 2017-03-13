@@ -23,6 +23,10 @@ public class Polygon {
         }
     }
 
+    public Vertex getVertex(int index) {
+        return this.Vertices.get(index);
+    }
+
     public void Make_top() {
 
     }

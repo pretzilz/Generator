@@ -2,8 +2,8 @@ package PolygonGenerator;
 
 import java.util.Random;
 public class Vertex implements Comparable<Vertex> {
-    int xCoordinate;
-    int yCoordinate;
+    private int xCoordinate;
+    private int yCoordinate;
 
     //pg 282
     //Vertex upc;
@@ -22,6 +22,14 @@ public class Vertex implements Comparable<Vertex> {
     public void setCoordinates(int x, int y) {
         this.xCoordinate = x;
         this.yCoordinate = y;
+    }
+
+    public int getX() {
+        return this.xCoordinate;
+    }
+
+    public int getY() {
+        return this.yCoordinate;
     }
 
     public int compareTo(Vertex right) {
