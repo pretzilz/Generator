@@ -13,7 +13,7 @@ class PolygonPanel extends JPanel {
     }
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        /*super.paintComponent(g);
         
         int x1, y1, x2, y2;
         int vertexRadius = 5;   //pixels, that is
@@ -25,6 +25,6 @@ class PolygonPanel extends JPanel {
             y2 = polygonToDraw.getVertex(vertexIndex).getY();
             g.drawLine(x1, y1, x2, y2);
             g.fillOval(polygonToDraw.getVertex(vertexIndex).getX() - (vertexRadius/2), polygonToDraw.getVertex(vertexIndex).getY() - (vertexRadius/2), vertexRadius, vertexRadius);
-        }
+        }*/
     }
 }

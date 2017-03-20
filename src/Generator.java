@@ -23,7 +23,7 @@ public class Generator {
 
     public static void generate(JFrame frame) {
         Polygon poly = new Polygon(50);
-        PolygonPanel p = new PolygonPanel(poly);
-        frame.add(p, BorderLayout.CENTER);
+        //PolygonPanel p = new PolygonPanel(poly);
+        //frame.add(p, BorderLayout.CENTER);
     }
 }

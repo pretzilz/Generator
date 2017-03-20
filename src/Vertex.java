@@ -10,10 +10,28 @@ public class Vertex implements Comparable<Vertex> {
     private Vertex lowerChild;
     private Vertex sibling;
 
-    public Vertex() {
-        Random rand = new Random();
-        this.xCoordinate = rand.nextInt(500) + 1;   //somewhere in the 500x500 expanse. we can set this to a variable later for variable window size.
-        this.yCoordinate = rand.nextInt(500) + 1;
+    public Vertex(boolean generateCoordinates) {
+        if (generateCoordinates) {
+            Random rand = new Random();
+            this.xCoordinate = rand.nextInt(500) + 1;   //somewhere in the 500x500 expanse. we can set this to a variable later for variable window size.
+            this.yCoordinate = rand.nextInt(500) + 1;
+            upperChild = null;
+            lowerChild = null;
+            sibling = null;
+        }
+        else {
+            //for temporary vertices
+            this.xCoordinate = -1;
+            this.yCoordinate = -1;
+            this.upperChild = null;
+            this.lowerChild = null;
+            this.sibling = null;
+        }
+    }
+
+    public Vertex(int xCoordinate, int yCoordinate) {
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
     }
 
     public void setCoordinates(int x, int y) {
@@ -45,8 +63,16 @@ public class Vertex implements Comparable<Vertex> {
         this.upperChild = v;
     }
 
+    public Vertex getUpperChild() {
+        return this.upperChild;
+    }
+
     public void setLowerChild(Vertex v) {
         this.lowerChild = v;
+    }
+
+    public Vertex getLowerChild() {
+        return this.lowerChild;
     }
 
     public void setSibling(Vertex v) {

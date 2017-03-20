@@ -4,10 +4,10 @@ public class Polygon {
     public ArrayList<Vertex> Vertices;  //this needs to be sorted by x coordinate
     public int numVertices;
     public Polygon(int numVertices) {
-        this.numVertices = numVertices;
+        /*this.numVertices = numVertices;
         this.Vertices = new ArrayList<Vertex>();
         for (int i = 0; i < numVertices; i++) {
-            this.Vertices.add(new Vertex());
+            this.Vertices.add(new Vertex(true));
         }
         
         Collections.sort(this.Vertices, new Comparator<Vertex>() {
@@ -15,11 +15,40 @@ public class Polygon {
             public int compare(Vertex v1, Vertex v2) {
                 return v1.compareTo(v2);    //compares based on x coordinate
             }
-        });
+        });*/
 
-        /*for (int i = 0; i < this.Vertices.size(); i++) {
-            System.out.println(this.Vertices.get(i).toString());
-        }*/
+        //testing things
+        this.Vertices = new ArrayList<Vertex>();
+        //thing found on page 282 of generate 1
+        //vert 1
+        this.Vertices.add(new Vertex(1, 10));
+        //vert 2
+        this.Vertices.add(new Vertex(3, 6));
+        //vert 3
+        this.Vertices.add(new Vertex(4, 1));
+        //vert 4
+        this.Vertices.add(new Vertex(6, 6));
+        //vert 5
+        this.Vertices.add(new Vertex(9, 8));
+        System.out.println(isAbove(Vertices.get(3), Vertices.get(1), Vertices.get(4)));
+
+        Vertex tmp = new Vertex(false);
+        Make_top(Vertices.get(0), Vertices.get(1), tmp);
+        Vertices.get(1).setUpperChild(tmp.getSibling());
+
+        tmp = new Vertex(false);
+        Make_top(Vertices.get(1), Vertices.get(2), tmp);
+        Vertices.get(2).setUpperChild(tmp.getSibling());
+
+        tmp = new Vertex(false);
+        Make_top(Vertices.get(2), Vertices.get(3), tmp);
+        Vertices.get(3).setUpperChild(tmp.getSibling());
+
+        tmp = new Vertex(false);
+        Make_top(Vertices.get(3), Vertices.get(4), tmp);
+        Vertices.get(4).setUpperChild(tmp.getSibling());
+        //should be tree(5)
+        System.out.println(Vertices.get(4).getUpperChild().toString());
     }
 
     public Vertex getVertex(int index) {
@@ -28,16 +57,49 @@ public class Polygon {
 
 
     //VISIBLITY SET HELPERS ==================================
-    //Page 11
-    public Make_Vt(int i) {
-        //t = tmp;
-        //Make_top(i - 1, i, )
-        //this.Vertices.get(i).setUpperChild(tmp.getSibling());
+    //assuming this starts with 2, as 1 was already computed
+    //will be called with i-1, i, and temp
+    public void Make_top(Vertex j, Vertex k, Vertex lastSib) {
+        //this is the variable tmp
+        while (j.getUpperChild() != null && isAbove(k, j.getUpperChild(), j)) {
+            Make_top(j.getUpperChild(), k, lastSib);
+            j.setUpperChild(j.getUpperChild().getSibling());
+        }
+        lastSib.setSibling(j);
+        lastSib = j;
+        
+        
     }
     
+    /*
     public Make_Vb(int i) {
         //t = tmp;
         //Make_bot(i - 1, i, )
         //this.Vertices.get(i).setLowerChild(tmp.getSibling());
     }
+    */
+
+    //This determines whether or not a vertex k is above the line (j1, j2)
+    public boolean isAbove(Vertex k, Vertex j1, Vertex j2) {
+        double slope = ((j2.getY() - j1.getY())/(j2.getX() - j1.getX()));   //get slope
+        double yInt = -((slope * j1.getX()) - j1.getY());   //find y intercept
+        double yCoordOfKOnLine = (slope * k.getX()) + yInt;    //get the y coordinate of k on line
+        double yDiff = yCoordOfKOnLine - k.getY(); //get difference between actual y coordinate of k and the one on the line
+        //if it's greater than 0, it's below the line. if it's equal, then it's on the line.
+        return yDiff < 0; 
+
+    }
+
+    public boolean isBelow(Vertex k, Vertex j1, Vertex j2) {
+        double slope = ((j2.getY() - j1.getY())/(j2.getX() - j1.getX()));   //get slope
+        double yInt = -((slope * j1.getX()) - j1.getY());   //find y intercept
+        double yCoordOfKOnLine = (slope * k.getX()) + yInt;    //get the y coordinate of k on line
+        double yDiff = yCoordOfKOnLine - k.getY(); //get difference between actual y coordinate of k and the one on the line
+        //if it's less than 0, it's above the line. if it's equal, then it's on the line.
+        return yDiff > 0; 
+
+    }
+
+
+
 }
