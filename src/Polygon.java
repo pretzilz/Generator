@@ -30,23 +30,23 @@ public class Polygon {
         this.Vertices.add(new Vertex(6, 6));
         //vert 5
         this.Vertices.add(new Vertex(9, 8));
-        System.out.println(isAbove(Vertices.get(3), Vertices.get(1), Vertices.get(4)));
 
-        Vertex tmp = new Vertex(false);
+        TempHelper tmp = new TempHelper();
         Make_top(Vertices.get(0), Vertices.get(1), tmp);
-        Vertices.get(1).setUpperChild(tmp.getSibling());
+        Vertices.get(1).setUpperChild(tmp.sibling);
+        
 
-        tmp = new Vertex(false);
+        tmp = new TempHelper();
         Make_top(Vertices.get(1), Vertices.get(2), tmp);
-        Vertices.get(2).setUpperChild(tmp.getSibling());
+        Vertices.get(2).setUpperChild(tmp.sibling);
 
-        tmp = new Vertex(false);
+        tmp = new TempHelper();
         Make_top(Vertices.get(2), Vertices.get(3), tmp);
-        Vertices.get(3).setUpperChild(tmp.getSibling());
+        Vertices.get(3).setUpperChild(tmp.sibling);
 
-        tmp = new Vertex(false);
+        tmp = new TempHelper();
         Make_top(Vertices.get(3), Vertices.get(4), tmp);
-        Vertices.get(4).setUpperChild(tmp.getSibling());
+        Vertices.get(4).setUpperChild(tmp.sibling);
         //should be tree(5)
         System.out.println(Vertices.get(4).getUpperChild().toString());
     }
@@ -59,14 +59,17 @@ public class Polygon {
     //VISIBLITY SET HELPERS ==================================
     //assuming this starts with 2, as 1 was already computed
     //will be called with i-1, i, and temp
-    public void Make_top(Vertex j, Vertex k, Vertex lastSib) {
-        //this is the variable tmp
+
+    public void Make_top(Vertex j, Vertex k, TempHelper lastSib) {
         while (j.getUpperChild() != null && isAbove(k, j.getUpperChild(), j)) {
             Make_top(j.getUpperChild(), k, lastSib);
             j.setUpperChild(j.getUpperChild().getSibling());
         }
-        lastSib.setSibling(j);
-        lastSib = j;
+        lastSib.sibling = j;
+        if (lastSib.ptr != null) {
+            lastSib.ptr.setSibling(j);
+        }
+        lastSib.ptr = j;
         
         
     }
