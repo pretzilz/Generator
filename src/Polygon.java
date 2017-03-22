@@ -35,13 +35,14 @@ public class Polygon {
         tmp = new Vertex(false);
         for (int vertexIndex = 1; vertexIndex < this.Vertices.size(); vertexIndex++) {  
             //System.out.println(tmp.getSibling().toString());
-            Make_top(Vertices.get(vertexIndex - 1), Vertices.get(vertexIndex));
+            Make_top(vertexIndex - 1, vertexIndex);
             Vertices.get(vertexIndex).setUpperChild(tmp.getSibling());
             //tmp = new Vertex(false);
         }
         
-        //should be tree(5)
-        System.out.println(Vertices.get(1).getUpperChild().toString());
+        //should return coordinates for 1, (1, 10)
+        //all siblings and upper children are currently null
+        //System.out.println(Vertices.get(4).getUpperChild().toString());
     }
 
     public Vertex getVertex(int index) {
@@ -53,14 +54,15 @@ public class Polygon {
     //assuming this starts with 2, as 1 was already computed
     //will be called with i-1, i, and temp
 
-    public void Make_top(Vertex j, Vertex k) {
-        while (j.getUpperChild() != null && isAbove(k, j.getUpperChild(), j)) {
-            Make_top(j.getUpperChild(), k);
-            j.setUpperChild(j.getUpperChild().getSibling());    //is j a copy of the actual vertex there? if so, we're not setting the right upper child here.
+    public void Make_top(int j, int k) {
+        while (Vertices.get(j).getUpperChild() != null && isAbove(Vertices.get(k), Vertices.get(j).getUpperChild(), Vertices.get(j))) {
+            //System.out.println("J: " + j + "K: " + k);
+            Make_top(Vertices.indexOf(Vertices.get(j).getUpperChild()), k);
+            Vertices.get(j).setUpperChild(Vertices.get(j).getUpperChild().getSibling());
         }
         
-        tmp.setSibling(j);
-        tmp = j;
+        tmp.setSibling(Vertices.get(j));    //if tmp is reset every iteration, setting the sibling for the last iteration doesn't matter. what needs to happen here?
+        tmp = Vertices.get(j);
         //System.out.println(tmp.toString());
     }
     
