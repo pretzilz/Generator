@@ -19,6 +19,14 @@ public class Vertex implements Comparable<Vertex> {
         sibling = null;
     }
 
+    public Vertex(boolean generateRandom) {
+        this.xCoordinate = -1;
+        this.yCoordinate = -1;
+        upperChild = null;
+        lowerChild = null;
+        sibling = null;
+    }
+
     public Vertex(int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;

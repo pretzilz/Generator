@@ -3,6 +3,8 @@ import java.util.*;
 public class Polygon {
     public ArrayList<Vertex> Vertices;  //this needs to be sorted by x coordinate
     public int numVertices;
+
+    public static Vertex tmp;
     public Polygon(int numVertices) {
         /*this.numVertices = numVertices;
         this.Vertices = new ArrayList<Vertex>();
@@ -27,28 +29,19 @@ public class Polygon {
         //vert 3
         this.Vertices.add(new Vertex(4, 1));
         //vert 4
-        this.Vertices.add(new Vertex(6, 6));
+        this.Vertices.add(new Vertex(6, 9));
         //vert 5
-        this.Vertices.add(new Vertex(9, 8));
-
-        TempHelper tmp = new TempHelper();
-        Make_top(Vertices.get(0), Vertices.get(1), tmp);
-        Vertices.get(1).setUpperChild(tmp.sibling);
+        this.Vertices.add(new Vertex(9, 11));
+        tmp = new Vertex(false);
+        for (int vertexIndex = 1; vertexIndex < this.Vertices.size(); vertexIndex++) {  
+            //System.out.println(tmp.getSibling().toString());
+            Make_top(Vertices.get(vertexIndex - 1), Vertices.get(vertexIndex));
+            Vertices.get(vertexIndex).setUpperChild(tmp.getSibling());
+            //tmp = new Vertex(false);
+        }
         
-
-        tmp = new TempHelper();
-        Make_top(Vertices.get(1), Vertices.get(2), tmp);
-        Vertices.get(2).setUpperChild(tmp.sibling);
-
-        tmp = new TempHelper();
-        Make_top(Vertices.get(2), Vertices.get(3), tmp);
-        Vertices.get(3).setUpperChild(tmp.sibling);
-
-        tmp = new TempHelper();
-        Make_top(Vertices.get(3), Vertices.get(4), tmp);
-        Vertices.get(4).setUpperChild(tmp.sibling);
         //should be tree(5)
-        System.out.println(Vertices.get(4).getUpperChild().toString());
+        System.out.println(Vertices.get(1).getUpperChild().toString());
     }
 
     public Vertex getVertex(int index) {
@@ -60,18 +53,15 @@ public class Polygon {
     //assuming this starts with 2, as 1 was already computed
     //will be called with i-1, i, and temp
 
-    public void Make_top(Vertex j, Vertex k, TempHelper lastSib) {
+    public void Make_top(Vertex j, Vertex k) {
         while (j.getUpperChild() != null && isAbove(k, j.getUpperChild(), j)) {
-            Make_top(j.getUpperChild(), k, lastSib);
-            j.setUpperChild(j.getUpperChild().getSibling());
+            Make_top(j.getUpperChild(), k);
+            j.setUpperChild(j.getUpperChild().getSibling());    //is j a copy of the actual vertex there? if so, we're not setting the right upper child here.
         }
-        lastSib.sibling = j;
-        if (lastSib.ptr != null) {
-            lastSib.ptr.setSibling(j);
-        }
-        lastSib.ptr = j;
         
-        
+        tmp.setSibling(j);
+        tmp = j;
+        //System.out.println(tmp.toString());
     }
     
     /*
