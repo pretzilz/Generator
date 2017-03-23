@@ -13,7 +13,8 @@ public class Generator {
     }
 
     public static void generate(JFrame frame) {
-        Polygon poly = new Polygon(50);
+        Polygon poly = new Polygon(10);
+        poly.printToFile();
         PolygonPanel p = new PolygonPanel(poly);
         frame.add(p, BorderLayout.CENTER);
     }

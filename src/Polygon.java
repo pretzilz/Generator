@@ -1,5 +1,6 @@
 package PolygonGenerator;
 import java.util.*;
+import java.io.*;
 public class Polygon {
     public ArrayList<Vertex> Vertices;  //this needs to be sorted by x coordinate
     public int numVertices;
@@ -12,7 +13,7 @@ public class Polygon {
         this.Vertices = new ArrayList<Vertex>();
         this.TopChain = new ArrayList<Vertex>();
         this.BottomChain = new ArrayList<Vertex>();
-
+        this.numVertices = numVertices;
         
         int xStart = 0;
         Random rand = new Random();
@@ -30,7 +31,6 @@ public class Polygon {
 
         //the top chain is now complete, now compute the bottom
         xStart = 0;
-
         for(int bottomChainIndex = 0; bottomChainIndex <= numVertices-k; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
             int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
@@ -38,11 +38,14 @@ public class Polygon {
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertex otherVertexOfLine = new Vertex();
             if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
+                System.out.println(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1)));
                 if(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1))) {    //if the first vertex is above the first line, it won't work anyway.
                     bottomChainIndex--; //if it sets it when it returns this might work
                     continue;
                 }
-                otherVertexOfLine = this.TopChain.get(0);   //but we still have to check if it intersects
+                else {
+                    otherVertexOfLine = this.TopChain.get(0);   //but we still have to check if it intersects
+                }
             }
             else if (bottomChainIndex == numVertices-k) {   //if we're at the end of the bottom chain, it will be connected to the last vertex of the top chain.
                 otherVertexOfLine = this.TopChain.get(k);
@@ -50,6 +53,7 @@ public class Polygon {
             else {
                 otherVertexOfLine = this.BottomChain.get(bottomChainIndex - 1); //otherwise the other point is the last point we added in the bottom chain
             }
+            System.out.println(intersectsWithTopChain(newVertex, otherVertexOfLine));
             if (!intersectsWithTopChain(newVertex, otherVertexOfLine)){
                 Vertices.add(newVertex);
                 BottomChain.add(newVertex);
@@ -60,7 +64,6 @@ public class Polygon {
                 continue;
             }
         }
-        //we could just ensure that the y value cannot be greater than than the largest (smallest?) yvalue of the top chain
 
     }
 
@@ -99,6 +102,28 @@ public class Polygon {
             }
         }
         return false;
+    }
+
+
+    public void printToFile() {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("polygon.txt")));
+            writer.write("Vertices: " + this.numVertices + "\n");
+            writer.write("Top chain length: " + this.TopChain.size() + "\n");
+            writer.write("Bottom chain length: " + this.BottomChain.size() + "\n");
+            writer.write("=============TOP CHAIN VERTICES=============\n");
+            for (int vertexIndex = 0; vertexIndex < this.TopChain.size(); vertexIndex++) {
+                writer.write(this.TopChain.get(vertexIndex) + "\n");
+            }
+            writer.write("===========BOTTOM CHAIN VERTICES============\n");
+            for (int vertexIndex = 0; vertexIndex < this.BottomChain.size(); vertexIndex++) {
+                writer.write(this.BottomChain.get(vertexIndex) + "\n");
+            }
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());
+        }
     }
 
 

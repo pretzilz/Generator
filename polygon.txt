@@ -1,0 +1,17 @@
+Vertices: 10
+Top chain length: 6
+Bottom chain length: 6
+=============TOP CHAIN VERTICES=============
+(1, 46)
+(18, 66)
+(24, 70)
+(39, 79)
+(53, 61)
+(63, 48)
+===========BOTTOM CHAIN VERTICES============
+(0, 7)
+(6, 63)
+(11, 95)
+(24, 11)
+(31, 20)
+(45, 13)
