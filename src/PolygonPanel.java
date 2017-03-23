@@ -13,18 +13,16 @@ class PolygonPanel extends JPanel {
     }
     @Override
     protected void paintComponent(Graphics g) {
-        /*super.paintComponent(g);
-        
+        super.paintComponent(g);
         int x1, y1, x2, y2;
         int vertexRadius = 5;   //pixels, that is
-        g.fillOval(polygonToDraw.getVertex(0).getX() - (vertexRadius/2), polygonToDraw.getVertex(0).getY() - (vertexRadius/2), vertexRadius, vertexRadius);
-        for (int vertexIndex = 1; vertexIndex < polygonToDraw.numVertices; vertexIndex++) {
-            x1 = polygonToDraw.getVertex(vertexIndex - 1).getX();
-            y1 = polygonToDraw.getVertex(vertexIndex - 1).getY();
-            x2 = polygonToDraw.getVertex(vertexIndex).getX();
-            y2 = polygonToDraw.getVertex(vertexIndex).getY();
+        for (int vertexIndex = 1; vertexIndex < polygonToDraw.TopChain.size(); vertexIndex++) {
+            x1 = polygonToDraw.TopChain.get(vertexIndex - 1).getX();
+            y1 = polygonToDraw.TopChain.get(vertexIndex - 1).getY();
+            x2 = polygonToDraw.TopChain.get(vertexIndex).getX();
+            y2 = polygonToDraw.TopChain.get(vertexIndex).getY();
             g.drawLine(x1, y1, x2, y2);
             g.fillOval(polygonToDraw.getVertex(vertexIndex).getX() - (vertexRadius/2), polygonToDraw.getVertex(vertexIndex).getY() - (vertexRadius/2), vertexRadius, vertexRadius);
-        }*/
+        }
     }
 }

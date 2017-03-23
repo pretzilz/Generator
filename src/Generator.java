@@ -9,21 +9,12 @@ public class Generator {
         generate(frame);
         frame.pack();
         frame.setVisible(true);
-        //getTNandBN(n);
         
-    }
-
-    /*
-        Page 6, Snoeyink/Zhu
-        This function will get the TN and BN(?) based on the number of vertices designated.
-    */
-    public int getTNandBN (int n) {
-        return 0;
     }
 
     public static void generate(JFrame frame) {
         Polygon poly = new Polygon(50);
-        //PolygonPanel p = new PolygonPanel(poly);
-        //frame.add(p, BorderLayout.CENTER);
+        PolygonPanel p = new PolygonPanel(poly);
+        frame.add(p, BorderLayout.CENTER);
     }
 }
