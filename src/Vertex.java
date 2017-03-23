@@ -10,6 +10,11 @@ public class Vertex implements Comparable<Vertex> {
         this.yCoordinate = yCoordinate;
     }
 
+    public Vertex() {
+        this.xCoordinate = 0;
+        this.yCoordinate = 0;
+    }
+
     public void setCoordinates(int x, int y) {
         this.xCoordinate = x;
         this.yCoordinate = y;

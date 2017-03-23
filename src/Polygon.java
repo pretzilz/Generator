@@ -18,32 +18,47 @@ public class Polygon {
         Random rand = new Random();
         int k = rand.nextInt(numVertices); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
         //compute the top chain
-        for(int vertexIndex = 0; vertexIndex <= k; vertexIndex++){
+        for(int topChainIndex = 0; topChainIndex <= k; topChainIndex++){
             //x coordinate is some random amount to the right of the previous one
-            int xVal = xStart + (rand.nextInt(10)); //or make it (0,10) or whatever (as big as we want it to go)
+            int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
             int yVal = rand.nextInt(100); //or make it (0,10) or whatever
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertices.add(newVertex);
-            TopChain.add(newVertex);//save point (xStart + xVal, yVal) as part of the top chain
+            TopChain.add(newVertex);
             xStart += xVal;
         }
 
         //the top chain is now complete, now compute the bottom
         xStart = 0;
 
-        for(int vertexIndex = 0; vertexIndex <= n-k; vertexIndex++){
+        for(int bottomChainIndex = 0; bottomChainIndex <= numVertices-k; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
-            double xVal = xStart + (rand.nextInt(10)); //or make it (0,10) or whatever (as big as we want it to go)
-            double yVal = rand.nextDouble(100); //or make it (0,10) or whatever (TODO replace the 10)
+            int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
+            int yVal = rand.nextInt(100); //or make it (0,10) or whatever (TODO replace the 10)
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
-            //Vertex lastVertex = 
-
-            if (intersectsWithTopChain(newVertex))
-            Vertices.add(newVertex);
-            BottomChain.add(newVertex);
-            xStart += xVal;
-            //save point (xStart + xVal, yVal) as part of the bottom chain if the newly created edge doesn't intersect the top chain and also do xStart += xVal;
-            //if the point does create an edge that clashes, then do an i-- which basically means, generate a new point
+            Vertex otherVertexOfLine = new Vertex();
+            if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
+                if(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1))) {    //if the first vertex is above the first line, it won't work anyway.
+                    bottomChainIndex--; //if it sets it when it returns this might work
+                    continue;
+                }
+                otherVertexOfLine = this.TopChain.get(0);   //but we still have to check if it intersects
+            }
+            else if (bottomChainIndex == numVertices-k) {   //if we're at the end of the bottom chain, it will be connected to the last vertex of the top chain.
+                otherVertexOfLine = this.TopChain.get(k);
+            }
+            else {
+                otherVertexOfLine = this.BottomChain.get(bottomChainIndex - 1); //otherwise the other point is the last point we added in the bottom chain
+            }
+            if (!intersectsWithTopChain(newVertex, otherVertexOfLine)){
+                Vertices.add(newVertex);
+                BottomChain.add(newVertex);
+                xStart += xVal;
+            }
+            else {
+                bottomChainIndex--;
+                continue;
+            }
         }
         //we could just ensure that the y value cannot be greater than than the largest (smallest?) yvalue of the top chain
 
@@ -72,6 +87,18 @@ public class Polygon {
         //if it's less than 0, it's above the line. if it's equal, then it's on the line.
         return yDiff > 0; 
 
+    }
+
+
+    public boolean intersectsWithTopChain(Vertex v1, Vertex v2) {   //this is horrible, but it works, i suppose
+        Edge newEdge = new Edge(v1, v2);
+        for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
+            Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex));
+            if (newEdge.intersects(currentTopEdge)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
