@@ -1,10 +1,11 @@
 package PolygonGenerator;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.Box;
 public class Generator {
+
     public static void main (String args[]) {
         JFrame frame = new JFrame("Generator");
-        frame.setLocation(300, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         generate(frame);
         frame.pack();
@@ -13,9 +14,16 @@ public class Generator {
     }
 
     public static void generate(JFrame frame) {
-        Polygon poly = new Polygon(10);
+        int verticesToGenerate = 10;
+
+        Polygon poly = new Polygon(verticesToGenerate);
         poly.printToFile();
         PolygonPanel p = new PolygonPanel(poly);
-        frame.add(p, BorderLayout.CENTER);
+        Box box = new Box(BoxLayout.Y_AXIS);
+        box.add(Box.createVerticalGlue());
+        box.add(p);
+        box.add(Box.createVerticalGlue());
+        frame.add(box);
+        frame.setSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
     }
 }

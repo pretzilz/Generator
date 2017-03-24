@@ -40,4 +40,8 @@ public class Edge {
         return withinX && withinY;
     }
 
+    public String toString() {
+        return this.point1.toString() + " -> " + this.point2.toString();
+    }
+
 }

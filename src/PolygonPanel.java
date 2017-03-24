@@ -6,10 +6,13 @@ import java.util.*;
 class PolygonPanel extends JPanel {
 
     Polygon polygonToDraw;
-    
+
     public PolygonPanel(Polygon poly) {
         this.polygonToDraw = poly;
-        this.setPreferredSize(new Dimension(500, 500));
+        //TODO make this scalable
+        this.setPreferredSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
+        this.setMaximumSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
+        this.setMinimumSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
     }
     @Override
     protected void paintComponent(Graphics g) {

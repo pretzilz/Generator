@@ -8,16 +8,38 @@ public class Polygon {
     public ArrayList<Vertex> TopChain;
     public ArrayList<Vertex> BottomChain;
 
-    public static Vertex tmp;
+    public ArrayList<Edge> Edges;
+
+    private int k;
+    private int largestX;
+    private int smallestX;
+    private int largestY;
+    private int smallestY;
+
+    private int height;
+    private int width;
     public Polygon(int numVertices) {
         this.Vertices = new ArrayList<Vertex>();
         this.TopChain = new ArrayList<Vertex>();
         this.BottomChain = new ArrayList<Vertex>();
+        this.Edges = new ArrayList<Edge>();
+        this.largestX = Integer.MIN_VALUE;
+        this.largestY = Integer.MIN_VALUE;
+        this.smallestX = Integer.MAX_VALUE;
+        this.smallestY = Integer.MAX_VALUE;
         this.numVertices = numVertices;
         
+        generateTopChain();
+        generateBottomChain();
+
+        this.width = this.largestX - this.smallestX;
+        this.height = this.largestY - this.smallestY;
+    }
+
+    private void generateTopChain() {
         int xStart = 0;
         Random rand = new Random();
-        int k = rand.nextInt(numVertices); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
+        k = rand.nextInt(numVertices); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex <= k; topChainIndex++){
             //x coordinate is some random amount to the right of the previous one
@@ -27,10 +49,29 @@ public class Polygon {
             Vertices.add(newVertex);
             TopChain.add(newVertex);
             xStart += xVal;
-        }
 
-        //the top chain is now complete, now compute the bottom
-        xStart = 0;
+            if (xStart > largestX) {
+                largestX = xStart;
+            }
+            if (xStart < smallestX) {
+                smallestX = xStart;
+            }
+            if (yVal > largestY) {
+                largestY = yVal;
+            }
+            if (yVal < smallestY) {
+                smallestY = yVal;
+            }
+            if (topChainIndex > 0) {
+                Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex));
+                Edges.add(newEdge);
+            }
+        }
+    }
+
+    private void generateBottomChain() {
+        int xStart = 0;
+        Random rand = new Random();
         for(int bottomChainIndex = 0; bottomChainIndex <= numVertices-k; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
             int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
@@ -38,7 +79,7 @@ public class Polygon {
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertex otherVertexOfLine = new Vertex();
             if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
-                System.out.println(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1)));
+                //System.out.println(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1)));
                 if(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1))) {    //if the first vertex is above the first line, it won't work anyway.
                     bottomChainIndex--; //if it sets it when it returns this might work
                     continue;
@@ -53,22 +94,45 @@ public class Polygon {
             else {
                 otherVertexOfLine = this.BottomChain.get(bottomChainIndex - 1); //otherwise the other point is the last point we added in the bottom chain
             }
-            System.out.println(intersectsWithTopChain(newVertex, otherVertexOfLine));
+            //System.out.println(intersectsWithTopChain(newVertex, otherVertexOfLine));
             if (!intersectsWithTopChain(newVertex, otherVertexOfLine)){
                 Vertices.add(newVertex);
                 BottomChain.add(newVertex);
                 xStart += xVal;
+                if (xStart > largestX) {
+                    largestX = xStart;
+                }
+                if (xStart < smallestX) {
+                    smallestX = xStart;
+                }
+                if (yVal > largestY) {
+                    largestY = yVal;
+                }
+                if (yVal < smallestY) {
+                    smallestY = yVal;
+                }
+                Edge newEdge = new Edge(newVertex, otherVertexOfLine);
+                Edges.add(newEdge);
             }
             else {
                 bottomChainIndex--;
                 continue;
             }
         }
-
     }
+
+
 
     public Vertex getVertex(int index) {
         return this.Vertices.get(index);
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int getWidth() {
+        return this.width;
     }
 
     //This determines whether or not a vertex k is above the line (j1, j2)
@@ -119,6 +183,10 @@ public class Polygon {
             writer.write("===========BOTTOM CHAIN VERTICES============\n");
             for (int vertexIndex = 0; vertexIndex < this.BottomChain.size(); vertexIndex++) {
                 writer.write(this.BottomChain.get(vertexIndex) + "\n");
+            }
+            writer.write("==================EDGES=====================\n");
+            for (int edgeIndex = 0; edgeIndex < this.Edges.size(); edgeIndex++) {
+                writer.write(this.Edges.get(edgeIndex) + "\n");
             }
             writer.close();
         } catch (IOException ex) {
