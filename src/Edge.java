@@ -8,16 +8,28 @@ public class Edge {
     private int bEq;
     private int cEq;
 
-    //private boolean onTopChain;
+    private boolean onTopChain;
 
-    public Edge(Vertex p1, Vertex p2) {
+    public Edge(Vertex p1, Vertex p2, boolean onTopChain) {
         this.point1 = p1;
         this.point2 = p2;
-        //this.onTopChain = onTop;
+        this.onTopChain = onTopChain;
 
         this.aEq = p2.getY() - p1.getY();
         this.bEq = p1.getX() - p2.getX();
         this.cEq = this.aEq * p1.getX() + this.bEq * p1.getY();
+    }
+
+    public Vertex getPoint1() {
+        return this.point1;
+    }
+
+    public Vertex getPoint2() {
+        return this.point2;
+    }
+
+    public boolean onTop() {
+        return this.onTopChain;
     }
 
 

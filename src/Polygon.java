@@ -39,9 +39,9 @@ public class Polygon {
     private void generateTopChain() {
         int xStart = 0;
         Random rand = new Random();
-        k = rand.nextInt(numVertices); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
+        k = (numVertices/10) + rand.nextInt(((9*numVertices)/10) - (numVertices/10) + 1); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
         //compute the top chain
-        for(int topChainIndex = 0; topChainIndex <= k; topChainIndex++){
+        for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random amount to the right of the previous one
             int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
             int yVal = rand.nextInt(100); //or make it (0,10) or whatever
@@ -63,7 +63,7 @@ public class Polygon {
                 smallestY = yVal;
             }
             if (topChainIndex > 0) {
-                Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex));
+                Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex), true);
                 Edges.add(newEdge);
             }
         }
@@ -72,7 +72,7 @@ public class Polygon {
     private void generateBottomChain() {
         int xStart = 0;
         Random rand = new Random();
-        for(int bottomChainIndex = 0; bottomChainIndex <= numVertices-k; bottomChainIndex++){
+        for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
             int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
             int yVal = rand.nextInt(100); //or make it (0,10) or whatever (TODO replace the 10)
@@ -81,38 +81,64 @@ public class Polygon {
             if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
                 //System.out.println(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1)));
                 if(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1))) {    //if the first vertex is above the first line, it won't work anyway.
-                    bottomChainIndex--; //if it sets it when it returns this might work
+                    bottomChainIndex--;
                     continue;
                 }
                 else {
                     otherVertexOfLine = this.TopChain.get(0);   //but we still have to check if it intersects
                 }
             }
-            else if (bottomChainIndex == numVertices-k) {   //if we're at the end of the bottom chain, it will be connected to the last vertex of the top chain.
-                otherVertexOfLine = this.TopChain.get(k);
-            }
             else {
                 otherVertexOfLine = this.BottomChain.get(bottomChainIndex - 1); //otherwise the other point is the last point we added in the bottom chain
             }
-            //System.out.println(intersectsWithTopChain(newVertex, otherVertexOfLine));
-            if (!intersectsWithTopChain(newVertex, otherVertexOfLine)){
-                Vertices.add(newVertex);
-                BottomChain.add(newVertex);
-                xStart += xVal;
-                if (xStart > largestX) {
-                    largestX = xStart;
+            if (!intersectsWithTopChain(otherVertexOfLine, newVertex)){
+                if (bottomChainIndex == numVertices-k-1) {    //if it's the last vertex, we have to also make sure the line connecting to the last vertex of the top chain doesn't intersect
+                    if (!intersectsWithTopChain(newVertex, this.TopChain.get(k-1))) {
+                        Vertices.add(newVertex);
+                        BottomChain.add(newVertex);
+                        xStart += xVal;
+                        if (xStart > largestX) {
+                            largestX = xStart;
+                        }
+                        if (xStart < smallestX) {
+                            smallestX = xStart;
+                        }
+                        if (yVal > largestY) {
+                            largestY = yVal;
+                        }
+                        if (yVal < smallestY) {
+                            smallestY = yVal;
+                        }
+                        Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
+                        Edges.add(newEdge);
+                        Edge lastEdge = new Edge(newVertex, this.TopChain.get(k-1), false);
+                        Edges.add(lastEdge);
+                    } else {
+                        bottomChainIndex--;
+                        continue;
+                    }
+                    
                 }
-                if (xStart < smallestX) {
-                    smallestX = xStart;
+                else {
+                    Vertices.add(newVertex);
+                    BottomChain.add(newVertex);
+                    xStart += xVal;
+                    if (xStart > largestX) {
+                        largestX = xStart;
+                    }
+                    if (xStart < smallestX) {
+                        smallestX = xStart;
+                    }
+                    if (yVal > largestY) {
+                        largestY = yVal;
+                    }
+                    if (yVal < smallestY) {
+                        smallestY = yVal;
+                    }
+                    Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
+                    Edges.add(newEdge);
                 }
-                if (yVal > largestY) {
-                    largestY = yVal;
-                }
-                if (yVal < smallestY) {
-                    smallestY = yVal;
-                }
-                Edge newEdge = new Edge(newVertex, otherVertexOfLine);
-                Edges.add(newEdge);
+                
             }
             else {
                 bottomChainIndex--;
@@ -158,9 +184,9 @@ public class Polygon {
 
 
     public boolean intersectsWithTopChain(Vertex v1, Vertex v2) {   //this is horrible, but it works, i suppose
-        Edge newEdge = new Edge(v1, v2);
+        Edge newEdge = new Edge(v1, v2, false);
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
-            Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex));
+            Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
             if (newEdge.intersects(currentTopEdge)) {
                 return true;
             }
