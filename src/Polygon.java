@@ -3,6 +3,8 @@ import java.util.*;
 import java.io.*;
 public class Polygon {
     //TODO fix case where bottom chain can intersect with itself
+    //TODO make y & x point generation some kind of function?
+    //TODO somehow fix infinite loop - maybe add a break after a certain number of iterations
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -44,8 +46,8 @@ public class Polygon {
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random amount to the right of the previous one
-            int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
-            int yVal = rand.nextInt(100); //or make it (0,10) or whatever
+            int xVal = rand.nextInt(10 * (numVertices/k));
+            int yVal = rand.nextInt(250);
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertices.add(newVertex);
             TopChain.add(newVertex);
@@ -69,39 +71,6 @@ public class Polygon {
                 Edges.add(newEdge);
             }
         }
-/*        Vertex one = new Vertex(14, 127);
-        Vertex two = new Vertex(31, 92);
-        Vertex three = new Vertex(41, 144);
-        Vertex four = new Vertex(42, 113);
-        Vertex five = new Vertex(58, 88);
-        Vertex six = new Vertex(75, 138);
-        Vertex seven = new Vertex(84, 59);
-        Vertices.add(one);
-        TopChain.add(one);
-        Vertices.add(two);
-        TopChain.add(two);
-        Vertices.add(three);
-        TopChain.add(three);
-        Vertices.add(four);
-        TopChain.add(four);
-        Vertices.add(five);
-        TopChain.add(five);
-        Vertices.add(six);
-        TopChain.add(six);
-        Vertices.add(seven);
-        TopChain.add(seven);
-        Edge e1 = new Edge(one, two, true);
-        Edge e2 = new Edge(two, three, true);
-        Edge e3 = new Edge(three, four, true);
-        Edge e4 = new Edge(four, five, true);
-        Edge e5 = new Edge(five, six, true);
-        Edge e6 = new Edge(six, seven, true);
-        Edges.add(e1);
-        Edges.add(e2);
-        Edges.add(e3);
-        Edges.add(e4);
-        Edges.add(e5);
-        Edges.add(e6);*/
     }
 
     private void generateBottomChain() {
@@ -109,8 +78,8 @@ public class Polygon {
         Random rand = new Random();
         for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
-            int xVal = rand.nextInt(20); //or make it (0,10) or whatever (as big as we want it to go)
-            int yVal = rand.nextInt(100); //or make it (0,10) or whatever (TODO replace the 10)
+            int xVal = rand.nextInt(10 * (numVertices/k)); //or make it (0,10) or whatever (as big as we want it to go)
+            int yVal = rand.nextInt(250);
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertex otherVertexOfLine = new Vertex();
             if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
@@ -246,10 +215,8 @@ public class Polygon {
 
     public boolean intersectsWithTopChain(Vertex v1, Vertex v2) {   //this is horrible, but it works, i suppose
         Edge newEdge = new Edge(v1, v2, false);
-        //System.out.println("Current new edge: " + newEdge);
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            //System.out.println("Current top edge: " + currentTopEdge);
             if (newEdge.intersects(currentTopEdge)) {
                 return true;
             }
@@ -257,12 +224,10 @@ public class Polygon {
         return false;
     }
 
-    public boolean intersectsWithNotFirstEdgeTopChain(Vertex v1, Vertex v2) {   //this is horrible, but it works, i suppose
+    public boolean intersectsWithNotFirstEdgeTopChain(Vertex v1, Vertex v2) {   //figure out if this line intersects with any line in the top chain save for the first
         Edge newEdge = new Edge(v1, v2, false);
-        //System.out.println("Current new edge: " + newEdge);
         for (int topEdgeIndex = 2; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            //System.out.println("Current top edge: " + currentTopEdge);
             if (newEdge.intersects(currentTopEdge)) {
                 return true;
             }
@@ -270,12 +235,10 @@ public class Polygon {
         return false;
     }
 
-    public boolean intersectsWithNotLastEdgeTopChain(Vertex v1, Vertex v2) {   //this is horrible, but it works, i suppose
+    public boolean intersectsWithNotLastEdgeTopChain(Vertex v1, Vertex v2) {   //figure out if this line intersects with any line in the top chain save for the last
         Edge newEdge = new Edge(v1, v2, false);
-        //System.out.println("Current new edge: " + newEdge);
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size() - 1; topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            //System.out.println("Current top edge: " + currentTopEdge);
             if (newEdge.intersects(currentTopEdge)) {
                 return true;
             }
