@@ -4,11 +4,10 @@ import javax.swing.*;
 import javax.swing.Box;
 import java.awt.event.*;
 public class Generator {
-    //TODO add button to generate another polygon
     //TODO add ability to save image of polygon
     //TODO add ability to set vertices in gui
 
-    public static int verticesToGenerate;
+    public static int verticesToGenerate = 50;
     public static void main (String args[]) {
         JFrame frame = new JFrame("Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,16 +20,19 @@ public class Generator {
     public static void setUpFrame(JFrame frame) {
         Box box = new Box(BoxLayout.Y_AXIS);
         box.add(Box.createVerticalGlue());
+        PolygonPanel p = new PolygonPanel();
+        p.setMinimumSize(new Dimension(500, 500));
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
-                    //generate(frame);
+                    p.generate(verticesToGenerate);
                 }
                 if ("setVertices".equals(event.getActionCommand())) {
                     System.out.println("Set vertices");
                 }
             }
         };
+        box.add(p);
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -53,18 +55,8 @@ public class Generator {
         box.add(buttonPane);
         box.add(Box.createVerticalGlue());
         frame.add(box);
-        frame.setMinimumSize(new Dimension(100, 100));
+        frame.setMinimumSize(new Dimension(500, 550));
         //frame.setMinimumSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
-    }
-
-
-    public static void generate(JFrame frame) {
-        int verticesToGenerate = 50;
-        Polygon poly = new Polygon(verticesToGenerate);
-        poly.printToFile();
-        PolygonPanel p = new PolygonPanel(poly);
-        
-        //box.add(p);
     }
 
 

@@ -21,6 +21,9 @@ public class Polygon {
 
     private int height;
     private int width;
+
+    private static final int MAX_ITERATIONS = 3000; //to break the loop in case it gets stuck.
+    private int iterations;
     public Polygon(int numVertices) {
         this.Vertices = new ArrayList<Vertex>();
         this.TopChain = new ArrayList<Vertex>();
@@ -31,10 +34,24 @@ public class Polygon {
         this.smallestX = Integer.MAX_VALUE;
         this.smallestY = Integer.MAX_VALUE;
         this.numVertices = numVertices;
-        
-        generateTopChain();
-        generateBottomChain();
-
+        iterations = 0;
+        while (true) {
+            generateTopChain();                        
+            generateBottomChain();
+            if (iterations == MAX_ITERATIONS) { //try again
+                iterations = 0;
+                this.TopChain = new ArrayList<Vertex>();
+                this.BottomChain = new ArrayList<Vertex>();
+                this.Edges = new ArrayList<Edge>();
+                this.largestX = Integer.MIN_VALUE;
+                this.largestY = Integer.MIN_VALUE;
+                this.smallestX = Integer.MAX_VALUE;
+                this.smallestY = Integer.MAX_VALUE;
+            }
+            else {
+                break;
+            }
+        }
         this.width = this.largestX - this.smallestX;
         this.height = this.largestY - this.smallestY;
     }
@@ -42,7 +59,7 @@ public class Polygon {
     private void generateTopChain() {
         int xStart = 0;
         Random rand = new Random();
-        k = (numVertices/10) + rand.nextInt(((9*numVertices)/10) - (numVertices/10) + 1); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
+        k = (numVertices/10) + rand.nextInt(((8*numVertices)/10) - (2*numVertices/10) + 1); //maybe ensure that k > n/10 and < 9n/10 or something. (could do +n/10 and so on)
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random amount to the right of the previous one
@@ -76,7 +93,7 @@ public class Polygon {
     private void generateBottomChain() {
         int xStart = 0;
         Random rand = new Random();
-        for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k; bottomChainIndex++){
+        for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k && iterations < MAX_ITERATIONS; bottomChainIndex++){
             //x coordinate is some random amount to the right of the previous one
             int xVal = rand.nextInt(10 * (numVertices/k)); //or make it (0,10) or whatever (as big as we want it to go)
             int yVal = rand.nextInt(250);
@@ -85,11 +102,10 @@ public class Polygon {
             if (bottomChainIndex == 0) {  //if we're at the first vertex of the bottom chain, it will be connected to the first vertex of the top chain.
                 if(isAbove(newVertex, this.TopChain.get(0), this.TopChain.get(1))) {    //if the first vertex is above the first line, it won't work anyway.
                     bottomChainIndex--;
+                    iterations++;
                     continue;
                 }
                 else {  //if it's the first vertex and it's below the first line, add it without checking
-                    //NOTE: we need to check if it intersects with anything but the first line (since it will technically always intersect with the first line)
-                    
                     otherVertexOfLine = this.TopChain.get(0);
                     if (!intersectsWithNotFirstEdgeTopChain(otherVertexOfLine, newVertex)) {
                         Vertices.add(newVertex);
@@ -111,6 +127,7 @@ public class Polygon {
                         Edges.add(newEdge);
                     } else {
                         bottomChainIndex--;
+                        iterations++;
                         continue;
                     }
                 }
@@ -144,6 +161,7 @@ public class Polygon {
                             Edges.add(lastEdge);
                         } else {
                             bottomChainIndex--;
+                            iterations++;
                             continue;
                         }
                         
@@ -171,6 +189,7 @@ public class Polygon {
             }
             else {
                 bottomChainIndex--;
+                iterations++;
                 continue;
             }
         }
