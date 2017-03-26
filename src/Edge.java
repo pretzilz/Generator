@@ -48,7 +48,7 @@ public class Edge {
 
     public boolean pointOnLine(double x, double y) {
         boolean withinX = Math.min(this.point1.getX(), this.point2.getX()) <= x && x <= Math.max(this.point1.getX(), this.point2.getX());
-        boolean withinY = Math.min(this.point1.getY(), this.point2.getY()) <= x && x <= Math.max(this.point1.getY(), this.point2.getY());
+        boolean withinY = Math.min(this.point1.getY(), this.point2.getY()) <= y && y <= Math.max(this.point1.getY(), this.point2.getY());
         return withinX && withinY;
     }
 
