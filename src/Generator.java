@@ -7,7 +7,7 @@ public class Generator {
     //TODO add ability to save image of polygon
     //TODO add ability to set vertices in gui
 
-    public static int verticesToGenerate = 50;
+    public static int verticesToGenerate = 10;
     public static void main (String args[]) {
         JFrame frame = new JFrame("Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,24 +19,24 @@ public class Generator {
 
     public static void setUpFrame(JFrame frame) {
         Box box = new Box(BoxLayout.Y_AXIS);
-        box.add(Box.createVerticalGlue());
         PolygonPanel p = new PolygonPanel();
-        p.setMinimumSize(new Dimension(500, 500));
+        p.setMinimumSize(new Dimension(500, 250));
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
                     p.generate(verticesToGenerate);
                 }
                 if ("setVertices".equals(event.getActionCommand())) {
-                    System.out.println("Set vertices");
+                    String vertices = (String)JOptionPane.showInputDialog(frame, "Vertices:", "Vertices", JOptionPane.PLAIN_MESSAGE, null, null, verticesToGenerate);
+                    verticesToGenerate = Integer.parseInt(vertices);
                 }
             }
         };
+        p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         box.add(p);
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        buttonPane.add(Box.createHorizontalGlue());
 
         JButton generateNew = new JButton("Generate new polygon");
         generateNew.setVerticalTextPosition(AbstractButton.CENTER);
@@ -53,10 +53,8 @@ public class Generator {
         setVertices.addActionListener(listener);
         buttonPane.add(setVertices);
         box.add(buttonPane);
-        box.add(Box.createVerticalGlue());
         frame.add(box);
-        frame.setMinimumSize(new Dimension(500, 550));
-        //frame.setMinimumSize(new Dimension(poly.getHeight() + 50, poly.getWidth() + 50));
+        frame.setMinimumSize(new Dimension(500, 400));
     }
 
 

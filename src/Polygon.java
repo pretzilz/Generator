@@ -4,7 +4,7 @@ import java.io.*;
 public class Polygon {
     //TODO fix case where bottom chain can intersect with itself
     //TODO make y & x point generation some kind of function?
-    //TODO somehow fix infinite loop - maybe add a break after a certain number of iterations
+    //TODO fix bottom chain x value going very high
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -105,7 +105,7 @@ public class Polygon {
                     iterations++;
                     continue;
                 }
-                else {  //if it's the first vertex and it's below the first line, add it without checking
+                else {  //if it's the first vertex and it's below the first line, it should be good but it might intersect with a different edge in the top chain
                     otherVertexOfLine = this.TopChain.get(0);
                     if (!intersectsWithNotFirstEdgeTopChain(otherVertexOfLine, newVertex)) {
                         Vertices.add(newVertex);
@@ -139,7 +139,7 @@ public class Polygon {
             if (bottomChainIndex != 0) {
                  if (!intersectsWithTopChain(otherVertexOfLine, newVertex)){
                     if (bottomChainIndex == numVertices-k-1) {   //if it's the last vertex, add the edge between the last vertex on bottom chain and the last vertex of the top chain
-                        if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1))) {
+                        if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1)) && !intersectsWithBottomChain(newVertex, this.TopChain.get(k-1))) {
                             Vertices.add(newVertex);
                             BottomChain.add(newVertex);
                             xStart += xVal;
@@ -259,6 +259,21 @@ public class Polygon {
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size() - 1; topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
             if (newEdge.intersects(currentTopEdge)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if the new edge intersects with the edges already generated in the bottom chain. 
+     * This will only happen making the last edge connecting to the last point in the top chain.
+     */
+    public boolean intersectsWithBottomChain(Vertex v1, Vertex v2) {
+        Edge newEdge = new Edge(v1, v2, false);
+        for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size() - 1; bottomEdgeIndex++) {
+            Edge currentBottomEdge = new Edge(this.BottomChain.get(bottomEdgeIndex - 1), this.BottomChain.get(bottomEdgeIndex), false);
+            if (newEdge.intersects(currentBottomEdge)) {
                 return true;
             }
         }
