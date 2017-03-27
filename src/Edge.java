@@ -33,7 +33,10 @@ public class Edge {
     }
 
 
-
+    /**
+     * Using method found at
+     * https://www.topcoder.com/community/data-science/data-science-tutorials/geometry-concepts-line-intersection-and-its-applications/
+     */
     public boolean intersects (Edge lhs) {
         int det = (this.aEq * lhs.bEq) - (lhs.aEq * this.bEq);
         if (det == 0) {

@@ -5,7 +5,6 @@ import javax.swing.Box;
 import java.awt.event.*;
 public class Generator {
     //TODO add ability to save image of polygon
-    //TODO add ability to set vertices in gui
 
     public static int verticesToGenerate = 10;
     public static void main (String args[]) {
