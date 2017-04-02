@@ -18,26 +18,26 @@ public class Generator {
 
     public static void setUpFrame(JFrame frame) {
         Box box = new Box(BoxLayout.Y_AXIS);
-        PolygonPanel p = new PolygonPanel();
-        p.setMinimumSize(new Dimension(500, 250));
+        PolygonPanel polygonPanel = new PolygonPanel();
+        polygonPanel.setMinimumSize(new Dimension(500, 250));
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
-                    p.generate(verticesToGenerate);
+                    polygonPanel.generate(verticesToGenerate);
                 }
                 if ("setVertices".equals(event.getActionCommand())) {
                     String vertices = (String)JOptionPane.showInputDialog(frame, "Vertices:", "Vertices", JOptionPane.PLAIN_MESSAGE, null, null, verticesToGenerate);
                     verticesToGenerate = Integer.parseInt(vertices);
                 }
                 if ("savePolygon".equals(event.getActionCommand())) {
-                    if (p.polygonHasBeenGenerated()) {
-                        p.savePolygon();
+                    if (polygonPanel.polygonHasBeenGenerated()) {
+                        polygonPanel.savePolygon();
                     }
                 }
             }
         };
-        p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        box.add(p);
+        polygonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        box.add(polygonPanel);
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));

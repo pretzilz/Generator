@@ -22,7 +22,7 @@ public class Polygon {
     private int height;
     private int width;
 
-    private static final int MAX_ITERATIONS = 3000; //to break the loop in case it gets stuck.
+    private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
     private int iterations;
     /**
      * Generates a polygon. Attempts to make one in MAX_ITERATIONS iterations, and if it can't, it starts over.
@@ -71,7 +71,7 @@ public class Polygon {
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random "normally distributed" amount to the right of the previous one
-            int xVal = Math.abs((int)Math.round(20 * rand.nextGaussian()));
+            int xVal = (int)Math.abs(Math.round(20 * rand.nextGaussian()));
             int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertices.add(newVertex);
@@ -232,22 +232,15 @@ public class Polygon {
      * This determines whether or not a vertex k is above the line (j1, j2)
      */
     public boolean isAbove(Vertex k, Vertex j1, Vertex j2) {
+        if (j2.getX() - j1.getX() == 0) {   //if, somehow, there was a straight line, it's not monotone. try again.
+            return false;
+        }
         double slope = ((j2.getY() - j1.getY())/(j2.getX() - j1.getX()));   //get slope
         double yInt = -((slope * j1.getX()) - j1.getY());   //find y intercept
         double yCoordOfKOnLine = (slope * k.getX()) + yInt;    //get the y coordinate of k on line
         double yDiff = yCoordOfKOnLine - k.getY(); //get difference between actual y coordinate of k and the one on the line
         //if it's greater than 0, it's below the line. if it's equal, then it's on the line.
         return yDiff < 0; 
-
-    }
-
-    public boolean isBelow(Vertex k, Vertex j1, Vertex j2) {
-        double slope = ((j2.getY() - j1.getY())/(j2.getX() - j1.getX()));   //get slope
-        double yInt = -((slope * j1.getX()) - j1.getY());   //find y intercept
-        double yCoordOfKOnLine = (slope * k.getX()) + yInt;    //get the y coordinate of k on line
-        double yDiff = yCoordOfKOnLine - k.getY(); //get difference between actual y coordinate of k and the one on the line
-        //if it's less than 0, it's above the line. if it's equal, then it's on the line.
-        return yDiff > 0; 
 
     }
 
