@@ -29,6 +29,11 @@ public class Generator {
                     String vertices = (String)JOptionPane.showInputDialog(frame, "Vertices:", "Vertices", JOptionPane.PLAIN_MESSAGE, null, null, verticesToGenerate);
                     verticesToGenerate = Integer.parseInt(vertices);
                 }
+                if ("savePolygon".equals(event.getActionCommand())) {
+                    if (p.polygonHasBeenGenerated()) {
+                        p.savePolygon();
+                    }
+                }
             }
         };
         p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -51,6 +56,15 @@ public class Generator {
         setVertices.setActionCommand("setVertices");
         setVertices.addActionListener(listener);
         buttonPane.add(setVertices);
+        buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
+
+        JButton savePolygon = new JButton("Save polygon");
+        savePolygon.setVerticalTextPosition(AbstractButton.CENTER);
+        savePolygon.setHorizontalTextPosition(AbstractButton.LEADING);
+        savePolygon.setActionCommand("savePolygon");
+        savePolygon.addActionListener(listener);
+        buttonPane.add(savePolygon);
+
         box.add(buttonPane);
         frame.add(box);
         frame.setMinimumSize(new Dimension(500, 400));

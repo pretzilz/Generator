@@ -45,4 +45,12 @@ class PolygonPanel extends JPanel {
         }
         
     }
+
+    public boolean polygonHasBeenGenerated() {
+        return this.polygonToDraw != null;
+    }
+
+    public void savePolygon() {
+        this.polygonToDraw.savePolygon();
+    }
 }

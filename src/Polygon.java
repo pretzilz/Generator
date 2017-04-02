@@ -67,14 +67,12 @@ public class Polygon {
     private void generateTopChain() {
         int xStart = 0;
         Random rand = new Random();
-        k = (numVertices/10) + rand.nextInt(((8*numVertices)/10) - (2*numVertices/10) + 1); //currently ensures that it generates something hopefully not the boundaries
+        k = (2*numVertices/10) + rand.nextInt(((8*numVertices)/10) - (2*numVertices/10) + 1); //currently ensures that it generates something hopefully not the boundaries
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random "normally distributed" amount to the right of the previous one
             int xVal = Math.abs((int)Math.round(20 * rand.nextGaussian()));
-            System.out.println(xVal);
             int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
-            System.out.println(yVal);
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertices.add(newVertex);
             TopChain.add(newVertex);
@@ -312,10 +310,16 @@ public class Polygon {
         return false;
     }
 
+
+    public void savePolygon() {
+        this.printToFile();
+        //save image
+    }
+
     /**
      * Prints data about the generated polygon to a file.
      */
-    public void printToFile() {
+    private void printToFile() {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("polygon.txt")));
