@@ -274,16 +274,10 @@ public class Polygon {
         return false;
     }
 
-
-    public void savePolygon() {
-        this.printToFile();
-        //save image
-    }
-
     /**
      * Prints data about the generated polygon to a file.
      */
-    private void printToFile() {
+    public void printToFile() {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("polygon.txt")));
