@@ -2,9 +2,10 @@ package PolygonGenerator;
 import java.util.*;
 import java.io.*;
 public class Polygon {
-    //TODO fix case where bottom chain can intersect with itself - fixed case where it does so on last edge
+    //TODO fix case where bottom chain can intersect with itself - still an issue?
     //TODO make y & x point generation some kind of function?
     //TODO fix bottom chain x value going very high?
+    //TODO fix bottom chain having several of the same vertices
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -71,25 +72,17 @@ public class Polygon {
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random "normally distributed" amount to the right of the previous one
-            int xVal = (int)Math.abs(Math.round(20 * rand.nextGaussian()));
+            int xVal = (int)Math.abs(Math.round(40 * rand.nextGaussian()) + 1);
             int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
+            xStart += xVal;
             Vertices.add(newVertex);
             TopChain.add(newVertex);
-            xStart += xVal;
-
-            if (xStart > largestX) {
-                largestX = xStart;
-            }
-            if (xStart < smallestX) {
-                smallestX = xStart;
-            }
-            if (yVal > largestY) {
-                largestY = yVal;
-            }
-            if (yVal < smallestY) {
-                smallestY = yVal;
-            }
+            
+            largestX = Math.max(largestX, xStart);
+            smallestX = Math.min(smallestX, xStart);
+            largestY = Math.max(largestY, yVal);
+            smallestY = Math.min(smallestY, yVal);
             if (topChainIndex > 0) {
                 Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex), true);
                 Edges.add(newEdge);
@@ -123,23 +116,8 @@ public class Polygon {
                 else {  //if it's the first vertex and it's below the first line, it should be good but it might intersect with a different edge in the top chain
                     otherVertexOfLine = this.TopChain.get(0);
                     if (!intersectsWithNotFirstEdgeTopChain(otherVertexOfLine, newVertex)) {
-                        Vertices.add(newVertex);
-                        BottomChain.add(newVertex);
+                        addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
                         xStart += xVal;
-                        if (xStart > largestX) {
-                            largestX = xStart;
-                        }
-                        if (xStart < smallestX) {
-                            smallestX = xStart;
-                        }
-                        if (yVal > largestY) {
-                            largestY = yVal;
-                        }
-                        if (yVal < smallestY) {
-                            smallestY = yVal;
-                        }
-                        Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
-                        Edges.add(newEdge);
                         iterations = 0;
                     } else {
                         bottomChainIndex--;
@@ -156,23 +134,8 @@ public class Polygon {
                  if (!intersectsWithTopChain(otherVertexOfLine, newVertex)){
                     if (bottomChainIndex == numVertices-k-1) {   //if it's the last vertex, add the edge between the last vertex on bottom chain and the last vertex of the top chain
                         if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1)) && !intersectsWithBottomChain(newVertex, this.TopChain.get(k-1))) {
-                            Vertices.add(newVertex);
-                            BottomChain.add(newVertex);
+                            addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
                             xStart += xVal;
-                            if (xStart > largestX) {
-                                largestX = xStart;
-                            }
-                            if (xStart < smallestX) {
-                                smallestX = xStart;
-                            }
-                            if (yVal > largestY) {
-                                largestY = yVal;
-                            }
-                            if (yVal < smallestY) {
-                                smallestY = yVal;
-                            }
-                            Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
-                            Edges.add(newEdge);
                             Edge lastEdge = new Edge(newVertex, this.TopChain.get(k-1), false);
                             Edges.add(lastEdge);
                             iterations = 0;
@@ -184,34 +147,38 @@ public class Polygon {
                         
                     }
                     else {
-                        Vertices.add(newVertex);
-                        BottomChain.add(newVertex);
-                        xStart += xVal;
-                        if (xStart > largestX) {
-                            largestX = xStart;
+                        if (!intersectsWithBottomChain(otherVertexOfLine, newVertex)) {
+                            addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
+                            xStart += xVal;
+                            iterations = 0;
                         }
-                        if (xStart < smallestX) {
-                            smallestX = xStart;
+                        else {
+                            bottomChainIndex--;
+                            iterations++;
+                            continue;
                         }
-                        if (yVal > largestY) {
-                            largestY = yVal;
-                        }
-                        if (yVal < smallestY) {
-                            smallestY = yVal;
-                        }
-                        Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
-                        Edges.add(newEdge);
-                        iterations = 0;
+                        
                     }
-                
-            }
-            else {
-                bottomChainIndex--;
-                iterations++;
-                continue;
+                }
+                else {
+                    bottomChainIndex--;
+                    iterations++;
+                    continue;
+                }
             }
         }
     }
+
+
+    public void addToBottomChain(Vertex newVertex, Vertex otherVertexOfLine, int x, int y) {
+        Vertices.add(newVertex);
+        BottomChain.add(newVertex);
+        largestX = Math.max(largestX, x);
+        smallestX = Math.min(smallestX, x);
+        largestY = Math.max(largestY, y);
+        smallestY = Math.min(smallestY, y);
+        Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
+        Edges.add(newEdge);
     }
 
 
@@ -299,6 +266,10 @@ public class Polygon {
             if (newEdge.intersects(currentBottomEdge)) {
                 return true;
             }
+        }
+        Edge firstEdge = new Edge(this.TopChain.get(0), this.BottomChain.get(0), false);   //also check if it intersects with the first edge of the bottom chain, which wasn't included
+        if (newEdge.intersects(firstEdge)) {
+            return true;
         }
         return false;
     }
