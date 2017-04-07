@@ -2,10 +2,9 @@ package PolygonGenerator;
 import java.util.*;
 import java.io.*;
 public class Polygon {
-    //TODO fix case where bottom chain can intersect with itself - still an issue?
     //TODO make y & x point generation some kind of function?
-    //TODO fix bottom chain x value going very high?
     //TODO fix bottom chain having several of the same vertices
+    //TODO fix a seemingly never-ending loop caused by k somehow with vertices greater than 10
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -218,7 +217,7 @@ public class Polygon {
         Edge newEdge = new Edge(v1, v2, false);
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            if (newEdge.intersects(currentTopEdge)) {
+            if (newEdge.intersects(currentTopEdge, false)) {
                 return true;
             }
         }
@@ -233,7 +232,7 @@ public class Polygon {
         Edge newEdge = new Edge(v1, v2, false);
         for (int topEdgeIndex = 2; topEdgeIndex < this.TopChain.size(); topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            if (newEdge.intersects(currentTopEdge)) {
+            if (newEdge.intersects(currentTopEdge, false)) {
                 return true;
             }
         }
@@ -248,7 +247,7 @@ public class Polygon {
         Edge newEdge = new Edge(v1, v2, false);
         for (int topEdgeIndex = 1; topEdgeIndex < this.TopChain.size() - 1; topEdgeIndex++) {
             Edge currentTopEdge = new Edge(this.TopChain.get(topEdgeIndex - 1), this.TopChain.get(topEdgeIndex), false);
-            if (newEdge.intersects(currentTopEdge)) {
+            if (newEdge.intersects(currentTopEdge, false)) {
                 return true;
             }
         }
@@ -263,12 +262,12 @@ public class Polygon {
         Edge newEdge = new Edge(v1, v2, false);
         for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size(); bottomEdgeIndex++) {
             Edge currentBottomEdge = new Edge(this.BottomChain.get(bottomEdgeIndex - 1), this.BottomChain.get(bottomEdgeIndex), false);
-            if (newEdge.intersects(currentBottomEdge)) {
+            if (newEdge.intersects(currentBottomEdge, bottomEdgeIndex == this.BottomChain.size() - 1)) {
                 return true;
             }
         }
         Edge firstEdge = new Edge(this.TopChain.get(0), this.BottomChain.get(0), false);   //also check if it intersects with the first edge of the bottom chain, which wasn't included
-        if (newEdge.intersects(firstEdge)) {
+        if (newEdge.intersects(firstEdge, this.BottomChain.size() == 1)) {  //if we're generating the second point in the chain, we care if it's parallel with the first bottom edge.
             return true;
         }
         return false;

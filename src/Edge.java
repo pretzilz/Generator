@@ -36,12 +36,20 @@ public class Edge {
     /**
      * Using method found at
      * https://www.topcoder.com/community/data-science/data-science-tutorials/geometry-concepts-line-intersection-and-its-applications/
+     * 
+     * The bool parallelBad is for when we're checking if the bottom chain intersects with itself.
+     * There is an edge case where a point will be generated on the line of the last edge it generated, which will be detected as parallel, which is true.
+     * However, that shouldn't work.
      */
-    public boolean intersects (Edge lhs) {
+    public boolean intersects (Edge lhs, boolean parallelBad) {
         int det = (this.aEq * lhs.bEq) - (lhs.aEq * this.bEq);
-        if (det == 0) {
-            return false;   //parallel
+        if (det == 0 && parallelBad) {
+            return true;
         }
+        else if (det == 0) {
+            return false; 
+        }
+
         else {
             double xIntersect = ((lhs.bEq * this.cEq) - (this.bEq * lhs.cEq)) /det;
             double yIntersect = ((this.aEq * lhs.cEq) - (lhs.aEq * this.cEq)) /det;
