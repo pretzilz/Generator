@@ -103,7 +103,7 @@ public class Polygon {
         Random rand = new Random();
         for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k && iterations < MAX_ITERATIONS; bottomChainIndex++){
             //x coordinate is some random, "normally distributed" amount to the right of the previous one
-            int xVal = (int)Math.abs(Math.round(20 * rand.nextGaussian()));
+            int xVal = (int)Math.abs(Math.round(40 * rand.nextGaussian()) + 1);
             int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertex otherVertexOfLine = new Vertex();
@@ -261,7 +261,7 @@ public class Polygon {
      */
     public boolean intersectsWithBottomChain(Vertex v1, Vertex v2) {
         Edge newEdge = new Edge(v1, v2, false);
-        for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size() - 1; bottomEdgeIndex++) {
+        for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size(); bottomEdgeIndex++) {
             Edge currentBottomEdge = new Edge(this.BottomChain.get(bottomEdgeIndex - 1), this.BottomChain.get(bottomEdgeIndex), false);
             if (newEdge.intersects(currentBottomEdge)) {
                 return true;
