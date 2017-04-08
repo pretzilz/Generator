@@ -14,13 +14,6 @@ public class Polygon {
     public ArrayList<Edge> Edges;
 
     private int k;
-    private int largestX;
-    private int smallestX;
-    private int largestY;
-    private int smallestY;
-
-    private int height;
-    private int width;
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
     private int iterations;
@@ -33,31 +26,26 @@ public class Polygon {
         this.TopChain = new ArrayList<Vertex>();
         this.BottomChain = new ArrayList<Vertex>();
         this.Edges = new ArrayList<Edge>();
-        this.largestX = Integer.MIN_VALUE;
-        this.largestY = Integer.MIN_VALUE;
-        this.smallestX = Integer.MAX_VALUE;
-        this.smallestY = Integer.MAX_VALUE;
         this.numVertices = numVertices;
         iterations = 0;
         while (true) {
-            generateTopChain();                        
+            System.out.print("Generating top chain...");
+            generateTopChain();     
+            System.out.print("done.\n");
+            System.out.print("Generating bottom chain...");
             generateBottomChain();
+            System.out.print("done.\n");
             if (iterations == MAX_ITERATIONS) { //try again
+                System.out.println("Generation failed. Trying again...");
                 iterations = 0;
                 this.TopChain = new ArrayList<Vertex>();
                 this.BottomChain = new ArrayList<Vertex>();
                 this.Edges = new ArrayList<Edge>();
-                this.largestX = Integer.MIN_VALUE;
-                this.largestY = Integer.MIN_VALUE;
-                this.smallestX = Integer.MAX_VALUE;
-                this.smallestY = Integer.MAX_VALUE;
             }
             else {
                 break;
             }
         }
-        this.width = this.largestX - this.smallestX;
-        this.height = this.largestY - this.smallestY;
     }
 
     /**
@@ -67,7 +55,7 @@ public class Polygon {
     private void generateTopChain() {
         int xStart = 0;
         Random rand = new Random();
-        k = (2*numVertices/10) + rand.nextInt(((8*numVertices)/10) - (2*numVertices/10) + 1); //currently ensures that it generates something hopefully not the boundaries
+        k = (2*numVertices/10) + rand.nextInt(((8*numVertices)/10) - ((2*numVertices)/10)); //currently ensures that it generates something hopefully not the boundaries
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random "normally distributed" amount to the right of the previous one
@@ -77,11 +65,6 @@ public class Polygon {
             xStart += xVal;
             Vertices.add(newVertex);
             TopChain.add(newVertex);
-            
-            largestX = Math.max(largestX, xStart);
-            smallestX = Math.min(smallestX, xStart);
-            largestY = Math.max(largestY, yVal);
-            smallestY = Math.min(smallestY, yVal);
             if (topChainIndex > 0) {
                 Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex), true);
                 Edges.add(newEdge);
@@ -128,16 +111,23 @@ public class Polygon {
             else {
                 otherVertexOfLine = this.BottomChain.get(bottomChainIndex - 1); //otherwise the other point is the last point we added in the bottom chain
             }
-
             if (bottomChainIndex != 0) {
                  if (!intersectsWithTopChain(otherVertexOfLine, newVertex)){
                     if (bottomChainIndex == numVertices-k-1) {   //if it's the last vertex, add the edge between the last vertex on bottom chain and the last vertex of the top chain
-                        if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1)) && !intersectsWithBottomChain(newVertex, this.TopChain.get(k-1))) {
+                        if (!intersectsWithBottomChain(otherVertexOfLine, newVertex)) { //if adding the last bottom chain vertex doesn't intersect with the bottom chain, add it
                             addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
-                            xStart += xVal;
-                            Edge lastEdge = new Edge(newVertex, this.TopChain.get(k-1), false);
-                            Edges.add(lastEdge);
-                            iterations = 0;
+                            if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1)) && !intersectsWithBottomChain(newVertex, this.TopChain.get(k-1))) {   //then check if connecting it to the top chain intersects with either the top chain or the bottom chain
+                                Edge lastEdge = new Edge(newVertex, this.TopChain.get(k-1), false); //if not, add it
+                                Edges.add(lastEdge);
+                                iterations = 0;
+                            }
+                            else {  //otherwise, remove what we just added
+                                removeLastVertexFromBottomChain();
+                                bottomChainIndex--;
+                                iterations++;
+                                continue;
+                            }
+                            
                         } else {
                             bottomChainIndex--;
                             iterations++;
@@ -172,26 +162,14 @@ public class Polygon {
     public void addToBottomChain(Vertex newVertex, Vertex otherVertexOfLine, int x, int y) {
         Vertices.add(newVertex);
         BottomChain.add(newVertex);
-        largestX = Math.max(largestX, x);
-        smallestX = Math.min(smallestX, x);
-        largestY = Math.max(largestY, y);
-        smallestY = Math.min(smallestY, y);
         Edge newEdge = new Edge(otherVertexOfLine, newVertex, false);
         Edges.add(newEdge);
     }
 
-
-
-    public Vertex getVertex(int index) {
-        return this.Vertices.get(index);
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
-
-    public int getWidth() {
-        return this.width;
+    public void removeLastVertexFromBottomChain() { //removes whatever we just added from the bottom chain
+        Vertices.remove(Vertices.size() - 1);
+        BottomChain.remove(BottomChain.size() - 1);
+        Edges.remove(Edges.size() -1);
     }
 
     /**
@@ -260,14 +238,14 @@ public class Polygon {
      */
     public boolean intersectsWithBottomChain(Vertex v1, Vertex v2) {
         Edge newEdge = new Edge(v1, v2, false);
-        for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size(); bottomEdgeIndex++) {
+        for (int bottomEdgeIndex = 1; bottomEdgeIndex < this.BottomChain.size() - 1; bottomEdgeIndex++) {
             Edge currentBottomEdge = new Edge(this.BottomChain.get(bottomEdgeIndex - 1), this.BottomChain.get(bottomEdgeIndex), false);
             if (newEdge.intersects(currentBottomEdge, bottomEdgeIndex == this.BottomChain.size() - 1)) {
                 return true;
             }
         }
         Edge firstEdge = new Edge(this.TopChain.get(0), this.BottomChain.get(0), false);   //also check if it intersects with the first edge of the bottom chain, which wasn't included
-        if (newEdge.intersects(firstEdge, this.BottomChain.size() == 1)) {  //if we're generating the second point in the chain, we care if it's parallel with the first bottom edge.
+        if (newEdge.intersects(firstEdge, true) && this.BottomChain.size() != 1) {
             return true;
         }
         return false;
