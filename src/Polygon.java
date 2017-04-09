@@ -46,6 +46,8 @@ public class Polygon {
                 break;
             }
         }
+
+        generateLP();   //generates the file to send to glpsol
     }
 
     /**
@@ -279,5 +281,9 @@ public class Polygon {
         }
     }
 
+
+    public void generateLP() {
+        
+    }
 
 }
