@@ -21,7 +21,7 @@ public class Polygon {
      * Generates a polygon. Attempts to make one in MAX_ITERATIONS iterations, and if it can't, it starts over.
      * This is horrible, but you know, whatever.
      */
-    public Polygon(int numVertices) {
+    public Polygon(int numVertices, String uniqueId) {
         this.Vertices = new ArrayList<Vertex>();
         this.TopChain = new ArrayList<Vertex>();
         this.BottomChain = new ArrayList<Vertex>();
@@ -47,7 +47,7 @@ public class Polygon {
             }
         }
 
-        generateLP();   //generates the file to send to glpsol
+        generateLPConstraints(uniqueId);   //generates the file to send to glpsol
     }
 
     /**
@@ -256,10 +256,10 @@ public class Polygon {
     /**
      * Prints data about the generated polygon to a file.
      */
-    public void printToFile() {
+    public void printToFile(String polygonId) {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("polygon.txt")));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("saved_polygons/data/polygon" + polygonId + ".txt")));
             writer.write("Vertices: " + this.numVertices + "\n");
             writer.write("Top chain length: " + this.TopChain.size() + "\n");
             writer.write("Bottom chain length: " + this.BottomChain.size() + "\n");
@@ -282,7 +282,33 @@ public class Polygon {
     }
 
 
-    public void generateLP() {
+    public void generateLPConstraints(String polygonId) {
+        try {
+            boolean folderCreated = new File("lp_constraints/").mkdir();
+            BufferedWriter lpWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("lp_constraints/lp" + polygonId + ".txt"))));
+            lpWriter.write("#    GLPSOL model for polygon " + polygonId + "\n\n");
+            lpWriter.write("#Variables\n");
+            for (int variableIndex = 0; variableIndex < this.Vertices.size(); variableIndex++) {
+                lpWriter.write("var x_" + variableIndex + " >= 0;\n");    //print in form x_<vertexIndex>
+            }
+            lpWriter.write("\n#Objective\n");
+            String objective = "minimize vertex_guard: ";
+            for (int variableIndex = 0; variableIndex < this.Vertices.size(); variableIndex++) {
+                if (variableIndex < this.Vertices.size() - 1) {
+                    objective += "x_" + variableIndex + " + ";
+                }
+                else {
+                    objective += "x_" + variableIndex + ";";
+                }
+                
+            }
+            lpWriter.write(objective + "\n");
+            lpWriter.write("#Constraints:\n");
+
+            lpWriter.close();
+        }catch (IOException ex) {
+            System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());
+        }
         
     }
 

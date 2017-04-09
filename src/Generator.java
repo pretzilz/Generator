@@ -3,10 +3,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.Box;
 import java.awt.event.*;
+import java.util.UUID;
 public class Generator {
     //TODO add ability to save image of polygon
 
     public static int verticesToGenerate = 10;
+
+    public static String currentPolygonId;
     public static void main (String args[]) {
         JFrame frame = new JFrame("Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +26,7 @@ public class Generator {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
-                    polygonPanel.generate(verticesToGenerate);
+                    generateNewPolygon(polygonPanel);
                 }
                 if ("setVertices".equals(event.getActionCommand())) {
                     String vertices = (String)JOptionPane.showInputDialog(frame, "Vertices:", "Vertices", JOptionPane.PLAIN_MESSAGE, null, null, verticesToGenerate);
@@ -31,7 +34,7 @@ public class Generator {
                 }
                 if ("savePolygon".equals(event.getActionCommand())) {
                     if (polygonPanel.polygonHasBeenGenerated()) {
-                        polygonPanel.savePolygon();
+                        polygonPanel.savePolygon(currentPolygonId);
                     }
                 }
             }
@@ -68,6 +71,12 @@ public class Generator {
         box.add(buttonPane);
         frame.add(box);
         frame.setMinimumSize(new Dimension(500, 400));
+    }
+
+
+    public static void generateNewPolygon(PolygonPanel polygonPanel) {
+        currentPolygonId = UUID.randomUUID().toString();
+        polygonPanel.generate(verticesToGenerate, currentPolygonId);
     }
 
 

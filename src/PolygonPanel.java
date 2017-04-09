@@ -16,8 +16,8 @@ class PolygonPanel extends JPanel {
         this.polygonImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
     }
 
-    public void generate(int numVertices) {
-        Polygon poly = new Polygon(numVertices);
+    public void generate(int numVertices, String uniqueId) {
+        Polygon poly = new Polygon(numVertices, uniqueId);
         polygonToDraw = poly;
         this.repaint();
     }
@@ -37,10 +37,13 @@ class PolygonPanel extends JPanel {
         return this.polygonToDraw != null;
     }
 
-    public void savePolygon() {
+    public void savePolygon(String polygonId) {
         try {
-            this.polygonToDraw.printToFile();
-            ImageIO.write(polygonImage, "PNG", new File("polygon.png"));
+            boolean directoryCreated = new File("saved_polygons/").mkdir();
+            directoryCreated = new File("saved_polygons/images/").mkdir();
+            directoryCreated = new File("saved_polygons/data/").mkdir();
+            this.polygonToDraw.printToFile(polygonId);
+            ImageIO.write(polygonImage, "PNG", new File("saved_polygons/images/polygon" + polygonId + ".png"));
         } catch (IOException ex) {
             System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());
         }
