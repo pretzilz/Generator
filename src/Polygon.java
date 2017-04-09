@@ -70,6 +70,8 @@ public class Polygon {
             if (topChainIndex > 0) {
                 Edge newEdge = new Edge(TopChain.get(topChainIndex - 1), TopChain.get(topChainIndex), true);
                 Edges.add(newEdge);
+                TopChain.get(topChainIndex - 1).setRightNeighbor(TopChain.get(topChainIndex));  //set right neighbor of previous to the one we just added
+                TopChain.get(topChainIndex).setLeftNeighbor(TopChain.get(topChainIndex - 1));   //and vice versa
             }
         }
     }
@@ -100,6 +102,8 @@ public class Polygon {
                 else {  //if it's the first vertex and it's below the first line, it should be good but it might intersect with a different edge in the top chain
                     otherVertexOfLine = this.TopChain.get(0);
                     if (!intersectsWithNotFirstEdgeTopChain(otherVertexOfLine, newVertex)) {
+                        newVertex.setLeftNeighbor(this.TopChain.get(0));   //the left neighbor will be the first edge of the top chain
+                        this.TopChain.get(0).setLeftNeighbor(newVertex);
                         addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
                         xStart += xVal;
                         iterations = 0;
@@ -117,6 +121,9 @@ public class Polygon {
                  if (!intersectsWithTopChain(otherVertexOfLine, newVertex)){
                     if (bottomChainIndex == numVertices-k-1) {   //if it's the last vertex, add the edge between the last vertex on bottom chain and the last vertex of the top chain
                         if (!intersectsWithBottomChain(otherVertexOfLine, newVertex)) { //if adding the last bottom chain vertex doesn't intersect with the bottom chain, add it
+                            newVertex.setLeftNeighbor(this.BottomChain.get(bottomChainIndex - 1));
+                            newVertex.setRightNeighbor(this.TopChain.get(this.TopChain.size() - 1));    //right neighbor will be the endof the top chain
+                            this.TopChain.get(this.TopChain.size() - 1).setRightNeighbor(newVertex);
                             addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
                             if (!intersectsWithNotLastEdgeTopChain(newVertex, this.TopChain.get(k-1)) && !intersectsWithBottomChain(newVertex, this.TopChain.get(k-1))) {   //then check if connecting it to the top chain intersects with either the top chain or the bottom chain
                                 Edge lastEdge = new Edge(newVertex, this.TopChain.get(k-1), false); //if not, add it
@@ -139,6 +146,8 @@ public class Polygon {
                     }
                     else {
                         if (!intersectsWithBottomChain(otherVertexOfLine, newVertex)) {
+                            newVertex.setLeftNeighbor(otherVertexOfLine);   //the last vertex we added
+                            this.BottomChain.get(bottomChainIndex - 1).setRightNeighbor(newVertex);
                             addToBottomChain(newVertex, otherVertexOfLine, xStart, yVal);
                             xStart += xVal;
                             iterations = 0;
@@ -253,6 +262,20 @@ public class Polygon {
         return false;
     }
 
+
+    /**
+     * This function returns a set of vertices that the vertex at the given index sees.
+     * This set will include itself, and it's two neighbors.
+     */
+    public ArrayList<Vertex> getVertexGuard(int vertexIndex) {
+        //TODO finish
+        ArrayList<Vertex> vertex_guard = new ArrayList<Vertex>();
+        vertex_guard.add(this.Vertices.get(vertexIndex));
+        vertex_guard.add(this.Vertices.get(vertexIndex).getRightNeighbor());
+        vertex_guard.add(this.Vertices.get(vertexIndex).getLeftNeighbor());
+        return vertex_guard;
+    }
+
     /**
      * Prints data about the generated polygon to a file.
      */
@@ -290,6 +313,7 @@ public class Polygon {
             lpWriter.write("#Variables\n");
             for (int variableIndex = 0; variableIndex < this.Vertices.size(); variableIndex++) {
                 lpWriter.write("var x_" + variableIndex + " >= 0;\n");    //print in form x_<vertexIndex>
+                this.Vertices.get(variableIndex).index = variableIndex;
             }
             lpWriter.write("\n#Objective\n");
             String objective = "minimize vertex_guard: ";
@@ -304,7 +328,19 @@ public class Polygon {
             }
             lpWriter.write(objective + "\n");
             lpWriter.write("#Constraints:\n");
-
+            for (int vertexIndex = 0; vertexIndex < this.Vertices.size(); vertexIndex++) {
+                ArrayList<Vertex> vertexGuard = getVertexGuard(vertexIndex);
+                lpWriter.write("s.t. guard_" + vertexIndex + ": ");
+                for (int vertexGuardIndex = 0; vertexGuardIndex < vertexGuard.size(); vertexGuardIndex++) {
+                    if (vertexGuardIndex < vertexGuard.size() - 1) {
+                        lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + " + "); //if all indexes are 0, here's why
+                    }
+                    else {
+                        lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + ";\n");
+                    }
+                }    
+            }
+            lpWriter.write("end;");
             lpWriter.close();
         }catch (IOException ex) {
             System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());

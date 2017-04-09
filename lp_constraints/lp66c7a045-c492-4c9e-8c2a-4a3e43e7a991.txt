@@ -1,0 +1,17 @@
+#    GLPSOL model for polygon 66c7a045-c492-4c9e-8c2a-4a3e43e7a991
+
+#Variables
+var x_0 >= 0;
+var x_1 >= 0;
+var x_2 >= 0;
+var x_3 >= 0;
+var x_4 >= 0;
+var x_5 >= 0;
+var x_6 >= 0;
+var x_7 >= 0;
+var x_8 >= 0;
+var x_9 >= 0;
+
+#Objective
+minimize vertex_guard: x_0 + x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9;
+#Constraints:
