@@ -227,7 +227,7 @@ public class Polygon {
         }
         return false;
     }
-
+ 
     /**
      * Check to see if a line created by two vertices intersects with any edge in the top chain, except for the last.
      * Used for adding the last vertex of the bottom chain, because it will always theoretically intersect with the top chain, as they're connected
@@ -268,11 +268,26 @@ public class Polygon {
      * This set will include itself, and it's two neighbors.
      */
     public ArrayList<Vertex> getVertexGuard(int vertexIndex) {
-        //TODO finish
         ArrayList<Vertex> vertex_guard = new ArrayList<Vertex>();
         vertex_guard.add(this.Vertices.get(vertexIndex));
         vertex_guard.add(this.Vertices.get(vertexIndex).getRightNeighbor());
         vertex_guard.add(this.Vertices.get(vertexIndex).getLeftNeighbor());
+
+        for (int otherEdgeIndex = 0; otherEdgeIndex < this.Vertices.size(); otherEdgeIndex++) { //iterate through all of the other vertices in the polygon
+            if (otherEdgeIndex != vertexIndex &&    //skip the edge to itself and it's neighbors
+                !this.Vertices.get(otherEdgeIndex).equals(this.Vertices.get(vertexIndex).getRightNeighbor()) && 
+                !this.Vertices.get(otherEdgeIndex).equals(this.Vertices.get(vertexIndex).getLeftNeighbor()))
+                 {    
+                    Edge currentInsideEdge = new Edge(this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex)); //make temporary line between the two vertices
+                    for (int edgeIndex = 0; edgeIndex < this.Edges.size(); edgeIndex++) {   //check if this intersects any other edge in the polygon
+                        // if (!this.Edges.get(edgeIndex).containsEndpoint(currentInsideEdge)
+                        //     && ) {   //if it doesn't share an endpoint (will always intersect, is a neighbor)
+                        // }
+                        //TODO - we have an issue. we need to check if the edge between the current other vertex we're trying to see and the current vertex
+                        //       is actually contained /inside/ the polygon. We can't just check if it intersects another line.
+                    }
+            }
+        }
         return vertex_guard;
     }
 
