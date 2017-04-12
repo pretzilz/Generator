@@ -343,18 +343,18 @@ public class Polygon {
             }
             lpWriter.write(objective + "\n");
             lpWriter.write("#Constraints:\n");
-            for (int vertexIndex = 0; vertexIndex < this.Vertices.size(); vertexIndex++) {
-                ArrayList<Vertex> vertexGuard = getVertexGuard(vertexIndex);
-                lpWriter.write("s.t. guard_" + vertexIndex + ": ");
-                for (int vertexGuardIndex = 0; vertexGuardIndex < vertexGuard.size(); vertexGuardIndex++) {
-                    if (vertexGuardIndex < vertexGuard.size() - 1) {
-                        lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + " + "); //if all indexes are 0, here's why
-                    }
-                    else {
-                        lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + ";\n");
-                    }
-                }    
-            }
+            //for (int vertexIndex = 0; vertexIndex < this.Vertices.size(); vertexIndex++) {
+            //    ArrayList<Vertex> vertexGuard = getVertexGuard(vertexIndex);
+            //    lpWriter.write("s.t. guard_" + vertexIndex + ": ");
+            //    for (int vertexGuardIndex = 0; vertexGuardIndex < vertexGuard.size(); vertexGuardIndex++) {
+            //        if (vertexGuardIndex < vertexGuard.size() - 1) {
+            //            lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + " + "); //if all indexes are 0, here's why
+            //        }
+            //        else {
+            //            lpWriter.write("x_" + vertexGuard.get(vertexGuardIndex).index + ";\n");
+            //        }
+            //    }    
+            //}
             lpWriter.write("end;");
             lpWriter.close();
         }catch (IOException ex) {
