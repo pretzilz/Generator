@@ -6,15 +6,27 @@ public class Vertex implements Comparable<Vertex> {
     private int yCoordinate;
 
     public int index;
+    private boolean onTopChain;
 
     private Vertex rightNeighbor;
     private Vertex leftNeighbor;
+
+
 
     public Vertex(int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.rightNeighbor = null;
         this.leftNeighbor = null;
+        this.onTopChain = false;
+    }
+
+    public Vertex(int xCoordinate, int yCoordinate, boolean onTopChain) {
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
+        this.rightNeighbor = null;
+        this.leftNeighbor = null;
+        this.onTopChain = onTopChain;
     }
 
     public Vertex() {
@@ -51,6 +63,10 @@ public class Vertex implements Comparable<Vertex> {
 
     public int getY() {
         return this.yCoordinate;
+    }
+
+    public boolean onTop() {
+        return this.onTopChain;
     }
 
     

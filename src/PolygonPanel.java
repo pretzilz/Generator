@@ -56,18 +56,19 @@ class PolygonPanel extends JPanel {
         if (this.polygonToDraw != null) {
             int x1, y1, x2, y2;
             int vertexRadius = 5;   //pixels, that is
+            
             for (int edgeIndex = 0; edgeIndex < polygonToDraw.Edges.size(); edgeIndex++) {
+                g.setColor(Color.MAGENTA);
                 x1 = polygonToDraw.Edges.get(edgeIndex).getPoint1().getX() + 10;    //so it's not right up against the edge of the window
                 y1 = this.getSize().height - polygonToDraw.Edges.get(edgeIndex).getPoint1().getY();
                 x2 = polygonToDraw.Edges.get(edgeIndex).getPoint2().getX() + 10;
                 y2 = this.getSize().height - polygonToDraw.Edges.get(edgeIndex).getPoint2().getY();
-                if (!polygonToDraw.Edges.get(edgeIndex).onTop()) {
-                    g.setColor(Color.RED);
-                }
-                else {
-                    g.setColor(Color.BLUE);
-                }
+
                 g.drawLine(x1, y1, x2, y2);
+                g.drawString(polygonToDraw.Edges.get(edgeIndex).getPoint1().index + "", x1, y1 + 20);
+                if (edgeIndex == polygonToDraw.Edges.size() - 1) {
+                    g.drawString(polygonToDraw.Edges.get(edgeIndex).getPoint2().index + "", x2, y2 + 20);
+                }
                 if (edgeIndex == 0) {
                     g.fillOval(polygonToDraw.Edges.get(edgeIndex).getPoint1().getX() - (vertexRadius/2) + 10, this.getSize().height - polygonToDraw.Edges.get(edgeIndex).getPoint1().getY() - (vertexRadius/2), vertexRadius, vertexRadius);
                 }

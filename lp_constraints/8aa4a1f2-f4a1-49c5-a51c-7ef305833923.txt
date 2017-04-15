@@ -1,0 +1,28 @@
+#    GLPSOL model for polygon 8aa4a1f2-f4a1-49c5-a51c-7ef305833923
+
+#Variables
+var x_0 >= 0;
+var x_1 >= 0;
+var x_2 >= 0;
+var x_3 >= 0;
+var x_4 >= 0;
+var x_5 >= 0;
+var x_6 >= 0;
+var x_7 >= 0;
+var x_8 >= 0;
+var x_9 >= 0;
+
+#Objective
+minimize vertex_guard: x_0 + x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9;
+#Constraints:
+s.t. guard_0: x_0 + x_2 + x_1 >= 1;
+s.t. guard_1: x_1 + x_3 + x_0 + x_2 >= 1;
+s.t. guard_2: x_2 + x_4 + x_0 + x_1 + x_3 >= 1;
+s.t. guard_3: x_3 + x_6 + x_1 + x_2 + x_4 >= 1;
+s.t. guard_4: x_4 + x_5 + x_2 + x_3 + x_6 >= 1;
+s.t. guard_5: x_5 + x_7 + x_4 + x_6 >= 1;
+s.t. guard_6: x_6 + x_9 + x_3 + x_4 + x_5 + x_7 >= 1;
+s.t. guard_7: x_7 + x_8 + x_5 + x_6 + x_9 >= 1;
+s.t. guard_8: x_8 + x_9 + x_7 >= 1;
+s.t. guard_9: x_9 + x_6 + x_8 + x_7 >= 1;
+end;
