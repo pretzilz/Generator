@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.*;
 public class Polygon {
     //TODO make y & x point generation some kind of function?
+    //TODO fix problem where whole top chain is below the bottom chain
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -36,6 +37,7 @@ public class Polygon {
             if (iterations == MAX_ITERATIONS) { //try again
                 System.out.println("Generation failed. Trying again...");
                 iterations = 0;
+                this.Vertices = new ArrayList<Vertex>();
                 this.TopChain = new ArrayList<Vertex>();
                 this.BottomChain = new ArrayList<Vertex>();
                 this.Edges = new ArrayList<Edge>();
@@ -189,7 +191,7 @@ public class Polygon {
         if (j2.getX() - j1.getX() == 0) {   //if, somehow, there was a straight line, it's not monotone. try again.
             return false;
         }
-        double slope = ((j2.getY() - j1.getY())/(j2.getX() - j1.getX()));   //get slope
+        double slope = ((j2.getY() - j1.getY())/(double)(j2.getX() - j1.getX()));   //get slope
         double yInt = -((slope * j1.getX()) - j1.getY());   //find y intercept
         double yCoordOfKOnLine = (slope * k.getX()) + yInt;    //get the y coordinate of k on line
         double yDiff = yCoordOfKOnLine - k.getY(); //get difference between actual y coordinate of k and the one on the line
@@ -282,10 +284,12 @@ public class Polygon {
                     for (int vertexBetweenEdgeIndex = Math.min(vertexIndex, otherEdgeIndex) + 1; vertexBetweenEdgeIndex < Math.max(vertexIndex, otherEdgeIndex); vertexBetweenEdgeIndex++) {   //get all vertices between p and q
                         Vertex pointBetweenPQ = this.Vertices.get(vertexBetweenEdgeIndex);
                         if (pointBetweenPQ.onTop() && !isAbove(pointBetweenPQ, this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex))) {
+                            System.out.println("Point " + pointBetweenPQ.index + " is below " + this.Vertices.get(otherEdgeIndex).index + "->" + this.Vertices.get(vertexIndex).index);
                             seesOtherPoint = false;
                             break;
                         }
                         if (!pointBetweenPQ.onTop() && isAbove(pointBetweenPQ, this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex))) {
+                            System.out.println("Point " + pointBetweenPQ.index + " is above " + this.Vertices.get(otherEdgeIndex).index + "->" + this.Vertices.get(vertexIndex).index);
                             seesOtherPoint = false;
                             break;
                         }
@@ -310,11 +314,11 @@ public class Polygon {
             writer.write("Bottom chain length: " + this.BottomChain.size() + "\n");
             writer.write("=============TOP CHAIN VERTICES=============\n");
             for (int vertexIndex = 0; vertexIndex < this.TopChain.size(); vertexIndex++) {
-                writer.write(this.TopChain.get(vertexIndex) + "\n");
+                writer.write(this.TopChain.get(vertexIndex).index + ": " + this.TopChain.get(vertexIndex) + "\n");
             }
             writer.write("===========BOTTOM CHAIN VERTICES============\n");
             for (int vertexIndex = 0; vertexIndex < this.BottomChain.size(); vertexIndex++) {
-                writer.write(this.BottomChain.get(vertexIndex) + "\n");
+                writer.write(this.BottomChain.get(vertexIndex).index + ": " + this.BottomChain.get(vertexIndex) + "\n");
             }
             writer.write("==================EDGES=====================\n");
             for (int edgeIndex = 0; edgeIndex < this.Edges.size(); edgeIndex++) {
