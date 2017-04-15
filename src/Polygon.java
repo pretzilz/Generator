@@ -85,7 +85,7 @@ public class Polygon {
      * If it does intersect, it tries again.
      */
     private void generateBottomChain() {
-        int xStart = 0;
+        int xStart = this.TopChain.get(0).getX();
         Random rand = new Random();
         for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k && iterations < MAX_ITERATIONS; bottomChainIndex++){
             //x coordinate is some random, "normally distributed" amount to the right of the previous one
@@ -284,12 +284,10 @@ public class Polygon {
                     for (int vertexBetweenEdgeIndex = Math.min(vertexIndex, otherEdgeIndex) + 1; vertexBetweenEdgeIndex < Math.max(vertexIndex, otherEdgeIndex); vertexBetweenEdgeIndex++) {   //get all vertices between p and q
                         Vertex pointBetweenPQ = this.Vertices.get(vertexBetweenEdgeIndex);
                         if (pointBetweenPQ.onTop() && !isAbove(pointBetweenPQ, this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex))) {
-                            System.out.println("Point " + pointBetweenPQ.index + " is below " + this.Vertices.get(otherEdgeIndex).index + "->" + this.Vertices.get(vertexIndex).index);
                             seesOtherPoint = false;
                             break;
                         }
                         if (!pointBetweenPQ.onTop() && isAbove(pointBetweenPQ, this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex))) {
-                            System.out.println("Point " + pointBetweenPQ.index + " is above " + this.Vertices.get(otherEdgeIndex).index + "->" + this.Vertices.get(vertexIndex).index);
                             seesOtherPoint = false;
                             break;
                         }
