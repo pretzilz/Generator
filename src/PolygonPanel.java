@@ -69,7 +69,13 @@ class PolygonPanel extends JPanel {
                 if (edgeIndex == polygonToDraw.Edges.size() - 1) {
                     g.drawString(polygonToDraw.Edges.get(edgeIndex).getPoint2().index + "", x2, y2 + 20);
                 }
+                if (polygonToDraw.Edges.get(edgeIndex).getPoint2().onTop()) {
+                    g.setColor(Color.BLACK);
+                } else {
+                    g.setColor(Color.RED);
+                }
                 if (edgeIndex == 0) {
+                    g.setColor(Color.BLACK);
                     g.fillOval(polygonToDraw.Edges.get(edgeIndex).getPoint1().getX() - (vertexRadius/2) + 10, this.getSize().height - polygonToDraw.Edges.get(edgeIndex).getPoint1().getY() - (vertexRadius/2), vertexRadius, vertexRadius);
                 }
                 g.fillOval(polygonToDraw.Edges.get(edgeIndex).getPoint2().getX() - (vertexRadius/2) + 10, this.getSize().height - polygonToDraw.Edges.get(edgeIndex).getPoint2().getY() - (vertexRadius/2), vertexRadius, vertexRadius);
