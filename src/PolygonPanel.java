@@ -43,7 +43,7 @@ class PolygonPanel extends JPanel {
             directoryCreated = new File("saved_polygons/images/").mkdir();
             directoryCreated = new File("saved_polygons/data/").mkdir();
             this.polygonToDraw.printToFile(polygonId);
-            ImageIO.write(polygonImage, "PNG", new File("saved_polygons/images/polygon" + polygonId + ".png"));
+            ImageIO.write(polygonImage, "PNG", new File("saved_polygons/images/" + polygonId + ".png"));
         } catch (IOException ex) {
             System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());
         }

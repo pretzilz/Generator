@@ -67,7 +67,7 @@ public class Edge {
         return this.point1.toString() + " -> " + this.point2.toString();
     }
 
-    public containsEndpoint(Edge right) {
+    public boolean containsEndpoint(Edge right) {
         return this.point1.equals(right.point1) || this.point2.equals(right.point2);
     }
 

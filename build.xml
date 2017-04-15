@@ -17,4 +17,9 @@
         <antcall target="compile"></antcall>
 	    <antcall target="run"></antcall>
     </target>
+
+    <target name="cleansaved">
+        <delete dir="saved_polygons/"/>
+        <delete dir="lp_constraints/"/>
+    </target>
 </project>

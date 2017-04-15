@@ -89,7 +89,7 @@ public class Polygon {
         Random rand = new Random();
         for(int bottomChainIndex = 0; bottomChainIndex < numVertices-k && iterations < MAX_ITERATIONS; bottomChainIndex++){
             //x coordinate is some random, "normally distributed" amount to the right of the previous one
-            int xVal = (int)Math.abs(Math.round(40 * rand.nextGaussian()) + 1);
+            int xVal = (int)Math.abs(Math.round(40 * rand.nextGaussian())) + 1;
             int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
             Vertex newVertex = new Vertex(xStart + xVal, yVal);
             Vertex otherVertexOfLine = new Vertex();
@@ -278,7 +278,7 @@ public class Polygon {
                 !this.Vertices.get(otherEdgeIndex).equals(this.Vertices.get(vertexIndex).getRightNeighbor()) && 
                 !this.Vertices.get(otherEdgeIndex).equals(this.Vertices.get(vertexIndex).getLeftNeighbor()))
                  {    
-                    Edge currentInsideEdge = new Edge(this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex)); //make temporary line between the two vertices
+                    Edge currentInsideEdge = new Edge(this.Vertices.get(otherEdgeIndex), this.Vertices.get(vertexIndex), false); //make temporary line between the two vertices
                     for (int edgeIndex = 0; edgeIndex < this.Edges.size(); edgeIndex++) {   //check if this intersects any other edge in the polygon
                         // if (!this.Edges.get(edgeIndex).containsEndpoint(currentInsideEdge)
                         //     && ) {   //if it doesn't share an endpoint (will always intersect, is a neighbor)
@@ -297,7 +297,7 @@ public class Polygon {
     public void printToFile(String polygonId) {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("saved_polygons/data/polygon" + polygonId + ".txt")));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("saved_polygons/data/" + polygonId + ".txt")));
             writer.write("Vertices: " + this.numVertices + "\n");
             writer.write("Top chain length: " + this.TopChain.size() + "\n");
             writer.write("Bottom chain length: " + this.BottomChain.size() + "\n");
@@ -323,7 +323,7 @@ public class Polygon {
     public void generateLPConstraints(String polygonId) {
         try {
             boolean folderCreated = new File("lp_constraints/").mkdir();
-            BufferedWriter lpWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("lp_constraints/lp" + polygonId + ".txt"))));
+            BufferedWriter lpWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("lp_constraints/" + polygonId + ".txt"))));
             lpWriter.write("#    GLPSOL model for polygon " + polygonId + "\n\n");
             lpWriter.write("#Variables\n");
             for (int variableIndex = 0; variableIndex < this.Vertices.size(); variableIndex++) {

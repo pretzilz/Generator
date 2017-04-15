@@ -28,17 +28,16 @@ public class Vertex implements Comparable<Vertex> {
         this.xCoordinate = x;
         this.yCoordinate = y;
     }
-
-    public void setLeftNeighbor(Vertex vert) {
-        this.leftNeighbor = vert;
-    }
-
-    public void getLeftNeighbor() {
+    public Vertex getLeftNeighbor() {
         return this.leftNeighbor;
     }
 
-    public void getRightNeighbor() {
+    public Vertex getRightNeighbor() {
         return this.rightNeighbor;
+    }
+
+    public void setLeftNeighbor(Vertex vert) {
+        this.leftNeighbor = vert;
     }
 
     public void setRightNeighbor(Vertex vert) {
