@@ -1,6 +1,7 @@
 <project>
     <target name="clean">
         <delete dir="build/"/>
+        <delete dir="glpsol_out/"/>
     </target>
 
     <target name="compile">
@@ -21,5 +22,6 @@
     <target name="cleansaved">
         <delete dir="saved_polygons/"/>
         <delete dir="lp_constraints/"/>
+        <delete dir="glpsol_out/"/>
     </target>
 </project>

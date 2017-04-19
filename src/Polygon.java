@@ -1,6 +1,7 @@
 package PolygonGenerator;
 import java.util.*;
 import java.io.*;
+import java.lang.*;
 public class Polygon {
     //TODO make y & x point generation some kind of function?
     //TODO fix problem where whole top chain is below the bottom chain
@@ -48,6 +49,8 @@ public class Polygon {
         }
         Collections.sort(this.Vertices);    //sort all the vertices by x value
         generateLPConstraints(uniqueId);   //generates the file to send to glpsol
+        solveLP(uniqueId);
+        checkOutput(uniqueId);
     }
 
     /**
@@ -328,7 +331,12 @@ public class Polygon {
         }
     }
 
-
+    /**
+     * Generates a model file for glpsol to solve. 
+     * The variables are all of the vertices in the polygon.
+     * The minimize function is just the sum of all of the vertices together, that is, minimize the sum of the vertex guards.
+     * The constraints are the list of vertices each vertex sees. Trivially, each vertex will always see itself and its neighbors.
+     */
     public void generateLPConstraints(String polygonId) {
         try {
             boolean folderCreated = new File("lp_constraints/").mkdir();
@@ -370,6 +378,29 @@ public class Polygon {
             System.out.println("¯\\_(ツ)_/¯ \n" + ex.getMessage());
         }
         
+    }
+
+    /**
+     * Calls glpsol, and tells it to solve the file we generated previously, and outputs the solution to /glpsol_out with the same id.
+     */
+    public void solveLP(String polygonId) {
+        try {
+            //create the output folder, first.
+            boolean folderCreated = new File("glpsol_out/").mkdir();
+            Runtime runtime = Runtime.getRuntime();
+            Process glpsolProcess = runtime.exec("cmd /c glpsol --model lp_constraints/" + polygonId + ".txt --output glpsol_out/" + polygonId + ".txt");
+            glpsolProcess.waitFor();
+        } catch (Exception e) {
+            System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
+        }
+    }
+
+    /**
+     * Reads the file that glpsol wrote, and checks to see if glpsol assigned any values less than a certain amount to any of the vertices. 
+     * If it finds that it did, it saves the polygon (text and data).
+     */
+    public void checkOutput(String polygonId) {
+
     }
 
 }
