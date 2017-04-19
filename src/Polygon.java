@@ -28,13 +28,18 @@ public class Polygon {
         this.Edges = new ArrayList<Edge>();
         this.numVertices = numVertices;
         iterations = 0;
+        long startTime, endTime;
         while (true) {
             System.out.print("Generating top chain...");
+            startTime = System.nanoTime();
             generateTopChain();     
-            System.out.print("done.\n");
+            endTime = System.nanoTime();
+            System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
             System.out.print("Generating bottom chain...");
+            startTime = System.nanoTime();
             generateBottomChain();
-            System.out.print("done.\n");
+            endTime = System.nanoTime();
+           System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
             if (iterations == MAX_ITERATIONS) { //try again
                 System.out.println("Generation failed. Trying again...");
                 iterations = 0;
@@ -48,9 +53,24 @@ public class Polygon {
             }
         }
         Collections.sort(this.Vertices);    //sort all the vertices by x value
+
+        System.out.print("Generating constraints...");
+        startTime = System.nanoTime();
         generateLPConstraints(uniqueId);   //generates the file to send to glpsol
+        endTime = System.nanoTime();
+        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+
+        System.out.print("Solving linear program...");
+        startTime = System.nanoTime();
         solveLP(uniqueId);
+        endTime = System.nanoTime();
+        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+
+        System.out.print("Checking output...");
+        startTime = System.nanoTime();
         checkOutput(uniqueId);
+        endTime = System.nanoTime();
+        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n\n");
     }
 
     /**
@@ -388,8 +408,12 @@ public class Polygon {
             //create the output folder, first.
             boolean folderCreated = new File("glpsol_out/").mkdir();
             Runtime runtime = Runtime.getRuntime();
-            Process glpsolProcess = runtime.exec("cmd /c glpsol --model lp_constraints/" + polygonId + ".txt --output glpsol_out/" + polygonId + ".txt");
-            glpsolProcess.waitFor();
+            ProcessBuilder glpsolProcess = new ProcessBuilder("cmd", "/c glpsol --model lp_constraints/" + polygonId + ".txt --output glpsol_out/" + polygonId + ".txt");
+            glpsolProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            glpsolProcess.redirectError(ProcessBuilder.Redirect.INHERIT);
+            Process p = glpsolProcess.start();
+            System.out.println();
+            p.waitFor();
         } catch (Exception e) {
             System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
         }
