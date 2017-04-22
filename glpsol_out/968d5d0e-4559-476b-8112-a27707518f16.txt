@@ -1,0 +1,133 @@
+Problem:    968d5d0e
+Rows:       51
+Columns:    50
+Non-zeros:  276
+Status:     OPTIMAL
+Objective:  vertex_guard = 11.14285714 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 vertex_guard B        11.1429                             
+     2 guard_0      NL             1             1                           1 
+     3 guard_1      B              1             1               
+     4 guard_2      B              1             1               
+     5 guard_3      B        1.14286             1               
+     6 guard_4      NL             1             1                           1 
+     7 guard_5      B        1.14286             1               
+     8 guard_6      NL             1             1                       < eps
+     9 guard_7      NL             1             1                       < eps
+    10 guard_8      B        1.64286             1               
+    11 guard_9      NL             1             1                           1 
+    12 guard_10     B              1             1               
+    13 guard_11     B              1             1               
+    14 guard_12     NL             1             1                       < eps
+    15 guard_13     NL             1             1                       < eps
+    16 guard_14     NL             1             1                    0.142857 
+    17 guard_15     NL             1             1                    0.642857 
+    18 guard_16     NL             1             1                    0.214286 
+    19 guard_17     NL             1             1                    0.142857 
+    20 guard_18     NL             1             1                    0.214286 
+    21 guard_19     NL             1             1                   0.0714286 
+    22 guard_20     NL             1             1                    0.428571 
+    23 guard_21     NL             1             1                    0.142857 
+    24 guard_22     NL             1             1                    0.285714 
+    25 guard_23     NL             1             1                         0.5 
+    26 guard_24     NL             1             1                    0.214286 
+    27 guard_25     NL             1             1                    0.142857 
+    28 guard_26     NL             1             1                    0.142857 
+    29 guard_27     NL             1             1                         0.5 
+    30 guard_28     NL             1             1                    0.357143 
+    31 guard_29     B        1.85714             1               
+    32 guard_30     B            1.5             1               
+    33 guard_31     NL             1             1                       < eps
+    34 guard_32     NL             1             1                         0.5 
+    35 guard_33     NL             1             1                         0.5 
+    36 guard_34     B              2             1               
+    37 guard_35     NL             1             1                       < eps
+    38 guard_36     NL             1             1                         0.5 
+    39 guard_37     B              1             1               
+    40 guard_38     NL             1             1                         0.5 
+    41 guard_39     NL             1             1                       < eps
+    42 guard_40     NL             1             1                         0.5 
+    43 guard_41     B              1             1               
+    44 guard_42     NL             1             1                         0.5 
+    45 guard_43     B              1             1               
+    46 guard_44     B              1             1               
+    47 guard_45     B              2             1               
+    48 guard_46     NL             1             1                         0.5 
+    49 guard_47     B              1             1               
+    50 guard_48     NL             1             1                         0.5 
+    51 guard_49     B              1             1               
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 x_0          NL             0             0                       < eps
+     2 x_1          B              1             0               
+     3 x_2          NL             0             0                       < eps
+     4 x_3          NL             0             0                       < eps
+     5 x_4          B       0.142857             0               
+     6 x_5          B              0             0               
+     7 x_6          NL             0             0                       < eps
+     8 x_7          B       0.857143             0               
+     9 x_8          NL             0             0                       < eps
+    10 x_9          B       0.142857             0               
+    11 x_10         B       0.642857             0               
+    12 x_11         B       0.214286             0               
+    13 x_12         NL             0             0                    0.857143 
+    14 x_13         NL             0             0                    0.214286 
+    15 x_14         B       0.142857             0               
+    16 x_15         B       0.642857             0               
+    17 x_16         B       0.214286             0               
+    18 x_17         B       0.142857             0               
+    19 x_18         B       0.214286             0               
+    20 x_19         B      0.0714286             0               
+    21 x_20         B       0.428571             0               
+    22 x_21         B       0.142857             0               
+    23 x_22         B       0.285714             0               
+    24 x_23         B            0.5             0               
+    25 x_24         B       0.214286             0               
+    26 x_25         B       0.142857             0               
+    27 x_26         B       0.142857             0               
+    28 x_27         B            0.5             0               
+    29 x_28         B       0.357143             0               
+    30 x_29         NL             0             0                    0.142857 
+    31 x_30         B              0             0               
+    32 x_31         B              1             0               
+    33 x_32         NL             0             0                       < eps
+    34 x_33         B              0             0               
+    35 x_34         B              0             0               
+    36 x_35         B              0             0               
+    37 x_36         B              1             0               
+    38 x_37         NL             0             0                       < eps
+    39 x_38         B              0             0               
+    40 x_39         B              0             0               
+    41 x_40         NL             0             0                         0.5 
+    42 x_41         B              1             0               
+    43 x_42         NL             0             0                         0.5 
+    44 x_43         NL             0             0                         0.5 
+    45 x_44         NL             0             0                       < eps
+    46 x_45         B              0             0               
+    47 x_46         NL             0             0                       < eps
+    48 x_47         B              1             0               
+    49 x_48         NL             0             0                       < eps
+    50 x_49         NL             0             0                         0.5 
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 2.22e-16 on row 20
+        max.rel.err = 7.40e-17 on row 20
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.DE: max.abs.err = 3.33e-16 on column 22
+        max.rel.err = 1.11e-16 on column 22
+        High quality
+
+KKT.DB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

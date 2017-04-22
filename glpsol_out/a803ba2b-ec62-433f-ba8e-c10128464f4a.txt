@@ -1,0 +1,233 @@
+Problem:    a803ba2b
+Rows:       101
+Columns:    100
+Non-zeros:  556
+Status:     OPTIMAL
+Objective:  vertex_guard = 22.64393939 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 vertex_guard B        22.6439                             
+     2 guard_0      NL             1             1                         0.5 
+     3 guard_1      B          1.375             1               
+     4 guard_2      NL             1             1                         0.5 
+     5 guard_3      B          1.375             1               
+     6 guard_4      B          1.375             1               
+     7 guard_5      NL             1             1                         0.5 
+     8 guard_6      NL             1             1                         0.5 
+     9 guard_7      B          1.375             1               
+    10 guard_8      B         1.6625             1               
+    11 guard_9      NL             1             1                       < eps
+    12 guard_10     NL             1             1                         0.5 
+    13 guard_11     NL             1             1                        0.25 
+    14 guard_12     B              2             1               
+    15 guard_13     NL             1             1                        0.75 
+    16 guard_14     B              1             1               
+    17 guard_15     B           1.25             1               
+    18 guard_16     NL             1             1                        0.25 
+    19 guard_17     NL             1             1                       < eps
+    20 guard_18     NL             1             1                         0.5 
+    21 guard_19     NL             1             1                        0.25 
+    22 guard_20     NL             1             1                        0.25 
+    23 guard_21     NL             1             1                       < eps
+    24 guard_22     NL             1             1                         0.5 
+    25 guard_23     B         1.1625             1               
+    26 guard_24     B         1.1625             1               
+    27 guard_25     NL             1             1                         0.5 
+    28 guard_26     B         1.5625             1               
+    29 guard_27     NL             1             1                         0.5 
+    30 guard_28     NL             1             1                         0.5 
+    31 guard_29     NL             1             1                       < eps
+    32 guard_30     NL             1             1                       < eps
+    33 guard_31     NL             1             1                         0.5 
+    34 guard_32     NL             1             1                       < eps
+    35 guard_33     NL             1             1                       < eps
+    36 guard_34     NL             1             1                         0.5 
+    37 guard_35     NL             1             1                         0.5 
+    38 guard_36     NL             1             1                       < eps
+    39 guard_37     NL             1             1                       < eps
+    40 guard_38     NL             1             1                         0.5 
+    41 guard_39     NL             1             1                         0.5 
+    42 guard_40     B           1.15             1               
+    43 guard_41     B         1.1375             1               
+    44 guard_42     NL             1             1                         0.5 
+    45 guard_43     B         1.7125             1               
+    46 guard_44     NL             1             1                    0.181818 
+    47 guard_45     B              1             1               
+    48 guard_46     NL             1             1                    0.318182 
+    49 guard_47     NL             1             1                         0.5 
+    50 guard_48     NL             1             1                   0.0909091 
+    51 guard_49     B              1             1               
+    52 guard_50     B              1             1               
+    53 guard_51     NL             1             1                    0.909091 
+    54 guard_52     B        1.69697             1               
+    55 guard_53     NL             1             1                   0.0909091 
+    56 guard_54     B              1             1               
+    57 guard_55     NL             1             1                    0.909091 
+    58 guard_56     B              1             1               
+    59 guard_57     B        1.21212             1               
+    60 guard_58     NL             1             1                   0.0909091 
+    61 guard_59     NL             1             1                    0.606061 
+    62 guard_60     NL             1             1                    0.212121 
+    63 guard_61     NL             1             1                    0.181818 
+    64 guard_62     NL             1             1                     0.30303 
+    65 guard_63     NL             1             1                     0.30303 
+    66 guard_64     NL             1             1                    0.212121 
+    67 guard_65     NL             1             1                    0.121212 
+    68 guard_66     NL             1             1                    0.363636 
+    69 guard_67     NL             1             1                    0.363636 
+    70 guard_68     NL             1             1                   0.0606061 
+    71 guard_69     NL             1             1                    0.151515 
+    72 guard_70     NL             1             1                    0.424242 
+    73 guard_71     B        1.54545             1               
+    74 guard_72     NL             1             1                    0.424242 
+    75 guard_73     B        1.06061             1               
+    76 guard_74     NL             1             1                    0.363636 
+    77 guard_75     NL             1             1                    0.212121 
+    78 guard_76     NL             1             1                       < eps
+    79 guard_77     NL             1             1                        0.25 
+    80 guard_78     NL             1             1                       < eps
+    81 guard_79     NL             1             1                    0.537879 
+    82 guard_80     NL             1             1                    0.212121 
+    83 guard_81     NL             1             1                       < eps
+    84 guard_82     NL             1             1                        0.25 
+    85 guard_83     NL             1             1                       < eps
+    86 guard_84     B            1.5             1               
+    87 guard_85     NL             1             1                        0.75 
+    88 guard_86     NL             1             1                        0.25 
+    89 guard_87     B        1.06061             1               
+    90 guard_88     NL             1             1                        0.75 
+    91 guard_89     B            1.5             1               
+    92 guard_90     NL             1             1                       < eps
+    93 guard_91     NL             1             1                        0.25 
+    94 guard_92     NL             1             1                         0.5 
+    95 guard_93     NL             1             1                        0.25 
+    96 guard_94     NL             1             1                        0.25 
+    97 guard_95     NL             1             1                        0.25 
+    98 guard_96     NL             1             1                        0.25 
+    99 guard_97     NL             1             1                        0.25 
+   100 guard_98     B              1             1               
+   101 guard_99     NL             1             1                         0.5 
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 x_0          NL             0             0                         0.5 
+     2 x_1          B          0.625             0               
+     3 x_2          NL             0             0                         0.5 
+     4 x_3          B          0.375             0               
+     5 x_4          B          0.375             0               
+     6 x_5          B              0             0               
+     7 x_6          B           0.25             0               
+     8 x_7          NL             0             0                       < eps
+     9 x_8          B           0.75             0               
+    10 x_9          NL             0             0                       < eps
+    11 x_10         NL             0             0                        0.25 
+    12 x_11         B           0.25             0               
+    13 x_12         B         0.6625             0               
+    14 x_13         NL             0             0                        0.25 
+    15 x_14         NL             0             0                        0.25 
+    16 x_15         B         0.3375             0               
+    17 x_16         B         0.0875             0               
+    18 x_17         B         0.1625             0               
+    19 x_18         B         0.1625             0               
+    20 x_19         B         0.5875             0               
+    21 x_20         B           0.25             0               
+    22 x_21         NL             0             0                       < eps
+    23 x_22         NL             0             0                        0.25 
+    24 x_23         B         0.1625             0               
+    25 x_24         B         0.5875             0               
+    26 x_25         NL             0             0                         0.5 
+    27 x_26         B         0.4125             0               
+    28 x_27         B         0.4125             0               
+    29 x_28         B         0.0125             0               
+    30 x_29         B           0.15             0               
+    31 x_30         B          0.425             0               
+    32 x_31         NL             0             0                         0.5 
+    33 x_32         B         0.4125             0               
+    34 x_33         B         0.0125             0               
+    35 x_34         B           0.15             0               
+    36 x_35         B          0.425             0               
+    37 x_36         NL             0             0                       < eps
+    38 x_37         B          0.425             0               
+    39 x_38         B         0.1375             0               
+    40 x_39         B           0.15             0               
+    41 x_40         B         0.7125             0               
+    42 x_41         B         0.2875             0               
+    43 x_42         NL             0             0                    0.318182 
+    44 x_43         B              0             0               
+    45 x_44         NL             0             0                    0.318182 
+    46 x_45         B              1             0               
+    47 x_46         NL             0             0                    0.181818 
+    48 x_47         NL             0             0                   0.0909091 
+    49 x_48         NL             0             0                    0.409091 
+    50 x_49         B              0             0               
+    51 x_50         B              1             0               
+    52 x_51         NL             0             0                   0.0909091 
+    53 x_52         B              0             0               
+    54 x_53         NL             0             0                     0.30303 
+    55 x_54         B        0.69697             0               
+    56 x_55         NL             0             0                   0.0909091 
+    57 x_56         NL             0             0                   0.0909091 
+    58 x_57         B        0.30303             0               
+    59 x_58         B       0.212121             0               
+    60 x_59         B        0.30303             0               
+    61 x_60         B       0.484848             0               
+    62 x_61         B       0.212121             0               
+    63 x_62         B       0.181818             0               
+    64 x_63         B       0.121212             0               
+    65 x_64         B       0.484848             0               
+    66 x_65         B       0.272727             0               
+    67 x_66         B      0.0606061             0               
+    68 x_67         B       0.121212             0               
+    69 x_68         B       0.333333             0               
+    70 x_69         B       0.545455             0               
+    71 x_70         B              0             0               
+    72 x_71         B      0.0606061             0               
+    73 x_72         NL             0             0                    0.575758 
+    74 x_73         B       0.939394             0               
+    75 x_74         B      0.0606061             0               
+    76 x_75         NL             0             0                    0.174242 
+    77 x_76         NL             0             0                    0.174242 
+    78 x_77         B              0             0               
+    79 x_78         B       0.939394             0               
+    80 x_79         B      0.0606061             0               
+    81 x_80         B              0             0               
+    82 x_81         B              0             0               
+    83 x_82         NL             0             0                    0.537879 
+    84 x_83         B       0.939394             0               
+    85 x_84         B      0.0606061             0               
+    86 x_85         B              0             0               
+    87 x_86         B              0             0               
+    88 x_87         B            0.5             0               
+    89 x_88         NL             0             0                        0.25 
+    90 x_89         B            0.5             0               
+    91 x_90         B            0.5             0               
+    92 x_91         B              0             0               
+    93 x_92         B              0             0               
+    94 x_93         B            0.5             0               
+    95 x_94         B            0.5             0               
+    96 x_95         B              0             0               
+    97 x_96         B              0             0               
+    98 x_97         B            0.5             0               
+    99 x_98         B            0.5             0               
+   100 x_99         NL             0             0                        0.25 
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 4.44e-16 on row 54
+        max.rel.err = 1.48e-16 on row 92
+        High quality
+
+KKT.PB: max.abs.err = 3.33e-16 on row 100
+        max.rel.err = 3.33e-16 on column 96
+        High quality
+
+KKT.DE: max.abs.err = 4.44e-16 on column 66
+        max.rel.err = 1.48e-16 on column 66
+        High quality
+
+KKT.DB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

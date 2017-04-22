@@ -1,0 +1,1033 @@
+Problem:    0ffad7cc
+Rows:       501
+Columns:    500
+Non-zeros:  4190
+Status:     OPTIMAL
+Objective:  vertex_guard = 80 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 vertex_guard B             80                             
+     2 guard_0      B              2             1               
+     3 guard_1      NL             1             1                           1 
+     4 guard_2      B              2             1               
+     5 guard_3      B              1             1               
+     6 guard_4      B              2             1               
+     7 guard_5      B              2             1               
+     8 guard_6      B              2             1               
+     9 guard_7      NL             1             1                           1 
+    10 guard_8      B              1             1               
+    11 guard_9      B              1             1               
+    12 guard_10     NL             1             1                           1 
+    13 guard_11     B              1             1               
+    14 guard_12     B              2             1               
+    15 guard_13     B              1             1               
+    16 guard_14     B              1             1               
+    17 guard_15     B              1             1               
+    18 guard_16     B              1             1               
+    19 guard_17     B              1             1               
+    20 guard_18     NL             1             1                       < eps
+    21 guard_19     B              1             1               
+    22 guard_20     B              1             1               
+    23 guard_21     B              1             1               
+    24 guard_22     B              1             1               
+    25 guard_23     NL             1             1                           1 
+    26 guard_24     B              1             1               
+    27 guard_25     NL             1             1                       < eps
+    28 guard_26     B              1             1               
+    29 guard_27     B              1             1               
+    30 guard_28     B              2             1               
+    31 guard_29     B              2             1               
+    32 guard_30     NL             1             1                           1 
+    33 guard_31     B              1             1               
+    34 guard_32     NL             1             1                       < eps
+    35 guard_33     B              2             1               
+    36 guard_34     B              2             1               
+    37 guard_35     B              3             1               
+    38 guard_36     NL             1             1                           1 
+    39 guard_37     B              2             1               
+    40 guard_38     B              2             1               
+    41 guard_39     NL             1             1                           1 
+    42 guard_40     NL             1             1                       < eps
+    43 guard_41     B              3             1               
+    44 guard_42     B              3             1               
+    45 guard_43     B              2             1               
+    46 guard_44     B              3             1               
+    47 guard_45     B              2             1               
+    48 guard_46     B              2             1               
+    49 guard_47     B              2             1               
+    50 guard_48     NL             1             1                           1 
+    51 guard_49     B              2             1               
+    52 guard_50     B              2             1               
+    53 guard_51     NL             1             1                       < eps
+    54 guard_52     B              2             1               
+    55 guard_53     B              1             1               
+    56 guard_54     B              1             1               
+    57 guard_55     NL             1             1                           1 
+    58 guard_56     B              2             1               
+    59 guard_57     B              2             1               
+    60 guard_58     B              2             1               
+    61 guard_59     NL             1             1                       < eps
+    62 guard_60     NL             1             1                           1 
+    63 guard_61     B              2             1               
+    64 guard_62     B              2             1               
+    65 guard_63     NL             1             1                       < eps
+    66 guard_64     B              2             1               
+    67 guard_65     NL             1             1                           1 
+    68 guard_66     B              2             1               
+    69 guard_67     B              2             1               
+    70 guard_68     B              2             1               
+    71 guard_69     NL             1             1                           1 
+    72 guard_70     B              2             1               
+    73 guard_71     B              2             1               
+    74 guard_72     NL             1             1                       < eps
+    75 guard_73     B              1             1               
+    76 guard_74     NL             1             1                           1 
+    77 guard_75     B              1             1               
+    78 guard_76     B              1             1               
+    79 guard_77     B              1             1               
+    80 guard_78     B              1             1               
+    81 guard_79     B              1             1               
+    82 guard_80     B              1             1               
+    83 guard_81     B              1             1               
+    84 guard_82     B              2             1               
+    85 guard_83     NL             1             1                           1 
+    86 guard_84     B              1             1               
+    87 guard_85     B              1             1               
+    88 guard_86     B              2             1               
+    89 guard_87     NL             1             1                           1 
+    90 guard_88     B              1             1               
+    91 guard_89     B              2             1               
+    92 guard_90     B              2             1               
+    93 guard_91     B              2             1               
+    94 guard_92     B              2             1               
+    95 guard_93     B              2             1               
+    96 guard_94     NL             1             1                           1 
+    97 guard_95     B              2             1               
+    98 guard_96     NL             1             1                       < eps
+    99 guard_97     NL             1             1                       < eps
+   100 guard_98     NL             1             1                       < eps
+   101 guard_99     B              1             1               
+   102 guard_100    B              2             1               
+   103 guard_101    NL             1             1                           1 
+   104 guard_102    B              2             1               
+   105 guard_103    NL             1             1                       < eps
+   106 guard_104    NL             1             1                           1 
+   107 guard_105    B              2             1               
+   108 guard_106    B              2             1               
+   109 guard_107    B              1             1               
+   110 guard_108    B              2             1               
+   111 guard_109    B              2             1               
+   112 guard_110    B              2             1               
+   113 guard_111    B              2             1               
+   114 guard_112    NL             1             1                           1 
+   115 guard_113    B              1             1               
+   116 guard_114    B              1             1               
+   117 guard_115    B              1             1               
+   118 guard_116    B              1             1               
+   119 guard_117    B              1             1               
+   120 guard_118    B              2             1               
+   121 guard_119    B              1             1               
+   122 guard_120    B              2             1               
+   123 guard_121    NL             1             1                           1 
+   124 guard_122    B              1             1               
+   125 guard_123    B              1             1               
+   126 guard_124    B              1             1               
+   127 guard_125    B              1             1               
+   128 guard_126    B              1             1               
+   129 guard_127    NL             1             1                       < eps
+   130 guard_128    B              1             1               
+   131 guard_129    NL             1             1                       < eps
+   132 guard_130    NL             1             1                           1 
+   133 guard_131    B              1             1               
+   134 guard_132    B              1             1               
+   135 guard_133    B              1             1               
+   136 guard_134    B              1             1               
+   137 guard_135    B              1             1               
+   138 guard_136    B              1             1               
+   139 guard_137    B              1             1               
+   140 guard_138    B              1             1               
+   141 guard_139    B              1             1               
+   142 guard_140    NL             1             1                       < eps
+   143 guard_141    NL             1             1                           1 
+   144 guard_142    B              1             1               
+   145 guard_143    B              2             1               
+   146 guard_144    B              2             1               
+   147 guard_145    B              2             1               
+   148 guard_146    B              2             1               
+   149 guard_147    NL             1             1                           1 
+   150 guard_148    B              2             1               
+   151 guard_149    B              1             1               
+   152 guard_150    B              1             1               
+   153 guard_151    NL             1             1                           1 
+   154 guard_152    B              3             1               
+   155 guard_153    B              1             1               
+   156 guard_154    B              1             1               
+   157 guard_155    B              2             1               
+   158 guard_156    NL             1             1                       < eps
+   159 guard_157    B              1             1               
+   160 guard_158    B              1             1               
+   161 guard_159    B              1             1               
+   162 guard_160    NL             1             1                           1 
+   163 guard_161    B              1             1               
+   164 guard_162    B              1             1               
+   165 guard_163    B              2             1               
+   166 guard_164    NL             1             1                           1 
+   167 guard_165    NL             1             1                       < eps
+   168 guard_166    B              1             1               
+   169 guard_167    B              2             1               
+   170 guard_168    B              1             1               
+   171 guard_169    B              1             1               
+   172 guard_170    B              2             1               
+   173 guard_171    B              2             1               
+   174 guard_172    B              3             1               
+   175 guard_173    NL             1             1                       < eps
+   176 guard_174    NL             1             1                           1 
+   177 guard_175    B              3             1               
+   178 guard_176    NL             1             1                       < eps
+   179 guard_177    NL             1             1                           1 
+   180 guard_178    B              1             1               
+   181 guard_179    B              1             1               
+   182 guard_180    B              1             1               
+   183 guard_181    B              1             1               
+   184 guard_182    B              1             1               
+   185 guard_183    B              1             1               
+   186 guard_184    B              1             1               
+   187 guard_185    B              2             1               
+   188 guard_186    B              2             1               
+   189 guard_187    NL             1             1                       < eps
+   190 guard_188    NL             1             1                           1 
+   191 guard_189    B              2             1               
+   192 guard_190    B              1             1               
+   193 guard_191    B              3             1               
+   194 guard_192    B              3             1               
+   195 guard_193    NL             1             1                           1 
+   196 guard_194    B              2             1               
+   197 guard_195    NL             1             1                       < eps
+   198 guard_196    B              1             1               
+   199 guard_197    B              1             1               
+   200 guard_198    B              1             1               
+   201 guard_199    B              1             1               
+   202 guard_200    NL             1             1                           1 
+   203 guard_201    B              1             1               
+   204 guard_202    B              2             1               
+   205 guard_203    B              2             1               
+   206 guard_204    NL             1             1                       < eps
+   207 guard_205    B              1             1               
+   208 guard_206    NL             1             1                           1 
+   209 guard_207    B              2             1               
+   210 guard_208    NL             1             1                       < eps
+   211 guard_209    B              1             1               
+   212 guard_210    B              1             1               
+   213 guard_211    NL             1             1                       < eps
+   214 guard_212    B              1             1               
+   215 guard_213    NL             1             1                           1 
+   216 guard_214    B              1             1               
+   217 guard_215    B              1             1               
+   218 guard_216    B              1             1               
+   219 guard_217    B              2             1               
+   220 guard_218    NL             1             1                           1 
+   221 guard_219    B              1             1               
+   222 guard_220    B              1             1               
+   223 guard_221    B              1             1               
+   224 guard_222    B              1             1               
+   225 guard_223    B              2             1               
+   226 guard_224    NL             1             1                           1 
+   227 guard_225    B              2             1               
+   228 guard_226    B              1             1               
+   229 guard_227    B              1             1               
+   230 guard_228    B              2             1               
+   231 guard_229    NL             1             1                           1 
+   232 guard_230    B              2             1               
+   233 guard_231    B              1             1               
+   234 guard_232    B              2             1               
+   235 guard_233    B              1             1               
+   236 guard_234    B              1             1               
+   237 guard_235    B              3             1               
+   238 guard_236    B              2             1               
+   239 guard_237    B              2             1               
+   240 guard_238    NL             1             1                           1 
+   241 guard_239    B              2             1               
+   242 guard_240    B              2             1               
+   243 guard_241    NL             1             1                       < eps
+   244 guard_242    B              1             1               
+   245 guard_243    B              2             1               
+   246 guard_244    B              2             1               
+   247 guard_245    NL             1             1                           1 
+   248 guard_246    B              2             1               
+   249 guard_247    B              2             1               
+   250 guard_248    B              2             1               
+   251 guard_249    NL             1             1                       < eps
+   252 guard_250    NL             1             1                           1 
+   253 guard_251    B              2             1               
+   254 guard_252    NL             1             1                       < eps
+   255 guard_253    NL             1             1                       < eps
+   256 guard_254    B              1             1               
+   257 guard_255    NL             1             1                       < eps
+   258 guard_256    B              1             1               
+   259 guard_257    B              1             1               
+   260 guard_258    NL             1             1                           1 
+   261 guard_259    B              1             1               
+   262 guard_260    B              1             1               
+   263 guard_261    B              1             1               
+   264 guard_262    B              2             1               
+   265 guard_263    B              2             1               
+   266 guard_264    NL             1             1                           1 
+   267 guard_265    B              1             1               
+   268 guard_266    B              1             1               
+   269 guard_267    B              1             1               
+   270 guard_268    B              1             1               
+   271 guard_269    NL             1             1                           1 
+   272 guard_270    B              1             1               
+   273 guard_271    NL             1             1                       < eps
+   274 guard_272    NL             1             1                       < eps
+   275 guard_273    B              1             1               
+   276 guard_274    B              1             1               
+   277 guard_275    NL             1             1                       < eps
+   278 guard_276    NL             1             1                       < eps
+   279 guard_277    B              1             1               
+   280 guard_278    B              1             1               
+   281 guard_279    B              1             1               
+   282 guard_280    NL             1             1                       < eps
+   283 guard_281    NL             1             1                           1 
+   284 guard_282    B              1             1               
+   285 guard_283    B              2             1               
+   286 guard_284    B              1             1               
+   287 guard_285    B              1             1               
+   288 guard_286    NL             1             1                           1 
+   289 guard_287    B              1             1               
+   290 guard_288    B              1             1               
+   291 guard_289    B              1             1               
+   292 guard_290    NL             1             1                       < eps
+   293 guard_291    B              2             1               
+   294 guard_292    B              1             1               
+   295 guard_293    NL             1             1                           1 
+   296 guard_294    B              1             1               
+   297 guard_295    B              1             1               
+   298 guard_296    NL             1             1                       < eps
+   299 guard_297    B              3             1               
+   300 guard_298    B              3             1               
+   301 guard_299    NL             1             1                           1 
+   302 guard_300    B              2             1               
+   303 guard_301    B              1             1               
+   304 guard_302    B              2             1               
+   305 guard_303    NL             1             1                           1 
+   306 guard_304    B              2             1               
+   307 guard_305    B              2             1               
+   308 guard_306    B              2             1               
+   309 guard_307    B              2             1               
+   310 guard_308    B              2             1               
+   311 guard_309    B              2             1               
+   312 guard_310    NL             1             1                       < eps
+   313 guard_311    B              1             1               
+   314 guard_312    NL             1             1                           1 
+   315 guard_313    B              1             1               
+   316 guard_314    B              2             1               
+   317 guard_315    B              2             1               
+   318 guard_316    B              1             1               
+   319 guard_317    B              2             1               
+   320 guard_318    B              1             1               
+   321 guard_319    NL             1             1                           1 
+   322 guard_320    B              1             1               
+   323 guard_321    B              1             1               
+   324 guard_322    B              1             1               
+   325 guard_323    B              1             1               
+   326 guard_324    NL             1             1                       < eps
+   327 guard_325    B              1             1               
+   328 guard_326    NL             1             1                       < eps
+   329 guard_327    B              1             1               
+   330 guard_328    NL             1             1                       < eps
+   331 guard_329    NL             1             1                           1 
+   332 guard_330    B              2             1               
+   333 guard_331    B              2             1               
+   334 guard_332    B              2             1               
+   335 guard_333    NL             1             1                       < eps
+   336 guard_334    NL             1             1                           1 
+   337 guard_335    B              2             1               
+   338 guard_336    B              1             1               
+   339 guard_337    B              2             1               
+   340 guard_338    B              3             1               
+   341 guard_339    NL             1             1                           1 
+   342 guard_340    NL             1             1                       < eps
+   343 guard_341    B              1             1               
+   344 guard_342    NL             1             1                       < eps
+   345 guard_343    NL             1             1                       < eps
+   346 guard_344    NL             1             1                           1 
+   347 guard_345    B              1             1               
+   348 guard_346    B              1             1               
+   349 guard_347    NL             1             1                       < eps
+   350 guard_348    NL             1             1                       < eps
+   351 guard_349    B              2             1               
+   352 guard_350    B              2             1               
+   353 guard_351    NL             1             1                           1 
+   354 guard_352    B              2             1               
+   355 guard_353    B              1             1               
+   356 guard_354    B              2             1               
+   357 guard_355    B              2             1               
+   358 guard_356    B              2             1               
+   359 guard_357    B              2             1               
+   360 guard_358    NL             1             1                           1 
+   361 guard_359    B              1             1               
+   362 guard_360    B              3             1               
+   363 guard_361    B              1             1               
+   364 guard_362    NL             1             1                       < eps
+   365 guard_363    NL             1             1                           1 
+   366 guard_364    NL             1             1                       < eps
+   367 guard_365    B              1             1               
+   368 guard_366    B              1             1               
+   369 guard_367    B              2             1               
+   370 guard_368    B              1             1               
+   371 guard_369    NL             1             1                           1 
+   372 guard_370    B              1             1               
+   373 guard_371    B              1             1               
+   374 guard_372    B              2             1               
+   375 guard_373    B              2             1               
+   376 guard_374    NL             1             1                           1 
+   377 guard_375    B              2             1               
+   378 guard_376    B              1             1               
+   379 guard_377    B              1             1               
+   380 guard_378    B              2             1               
+   381 guard_379    B              2             1               
+   382 guard_380    B              2             1               
+   383 guard_381    NL             1             1                           1 
+   384 guard_382    B              1             1               
+   385 guard_383    B              5             1               
+   386 guard_384    B              1             1               
+   387 guard_385    B              1             1               
+   388 guard_386    B              2             1               
+   389 guard_387    B              2             1               
+   390 guard_388    NL             1             1                           1 
+   391 guard_389    B              2             1               
+   392 guard_390    B              2             1               
+   393 guard_391    B              2             1               
+   394 guard_392    B              1             1               
+   395 guard_393    B              1             1               
+   396 guard_394    B              6             1               
+   397 guard_395    B              1             1               
+   398 guard_396    B              2             1               
+   399 guard_397    B              4             1               
+   400 guard_398    NL             1             1                           1 
+   401 guard_399    B              2             1               
+   402 guard_400    B              3             1               
+   403 guard_401    NL             1             1                       < eps
+   404 guard_402    B              1             1               
+   405 guard_403    B              1             1               
+   406 guard_404    B              4             1               
+   407 guard_405    NL             1             1                           1 
+   408 guard_406    B              1             1               
+   409 guard_407    B              2             1               
+   410 guard_408    NL             1             1                       < eps
+   411 guard_409    B              5             1               
+   412 guard_410    NL             1             1                           1 
+   413 guard_411    B              2             1               
+   414 guard_412    NL             1             1                       < eps
+   415 guard_413    B              4             1               
+   416 guard_414    NL             1             1                           1 
+   417 guard_415    B              1             1               
+   418 guard_416    B              7             1               
+   419 guard_417    B              1             1               
+   420 guard_418    B              1             1               
+   421 guard_419    NL             1             1                           1 
+   422 guard_420    B              1             1               
+   423 guard_421    B              9             1               
+   424 guard_422    NL             1             1                           1 
+   425 guard_423    B              1             1               
+   426 guard_424    B              1             1               
+   427 guard_425    B              5             1               
+   428 guard_426    NL             1             1                           1 
+   429 guard_427    B              1             1               
+   430 guard_428    B              1             1               
+   431 guard_429    B              2             1               
+   432 guard_430    B              1             1               
+   433 guard_431    B              2             1               
+   434 guard_432    B              2             1               
+   435 guard_433    NL             1             1                           1 
+   436 guard_434    B              8             1               
+   437 guard_435    B              4             1               
+   438 guard_436    B              3             1               
+   439 guard_437    B              2             1               
+   440 guard_438    NL             1             1                           1 
+   441 guard_439    B              2             1               
+   442 guard_440    B              3             1               
+   443 guard_441    NL             1             1                           1 
+   444 guard_442    B              1             1               
+   445 guard_443    B              3             1               
+   446 guard_444    B              1             1               
+   447 guard_445    B              2             1               
+   448 guard_446    NL             1             1                           1 
+   449 guard_447    B              1             1               
+   450 guard_448    B              1             1               
+   451 guard_449    B              6             1               
+   452 guard_450    B              2             1               
+   453 guard_451    B              2             1               
+   454 guard_452    B              1             1               
+   455 guard_453    B              2             1               
+   456 guard_454    B              1             1               
+   457 guard_455    B              1             1               
+   458 guard_456    B              2             1               
+   459 guard_457    NL             1             1                           1 
+   460 guard_458    B              2             1               
+   461 guard_459    B              1             1               
+   462 guard_460    B              1             1               
+   463 guard_461    B              7             1               
+   464 guard_462    NL             1             1                         0.5 
+   465 guard_463    B              2             1               
+   466 guard_464    NL             1             1                         0.5 
+   467 guard_465    B              2             1               
+   468 guard_466    NL             1             1                         0.5 
+   469 guard_467    B              4             1               
+   470 guard_468    NL             1             1                         0.5 
+   471 guard_469    B              1             1               
+   472 guard_470    B              3             1               
+   473 guard_471    NL             1             1                         0.5 
+   474 guard_472    B              5             1               
+   475 guard_473    NL             1             1                         0.5 
+   476 guard_474    B              4             1               
+   477 guard_475    B              8             1               
+   478 guard_476    NL             1             1                           1 
+   479 guard_477    B              3             1               
+   480 guard_478    B              1             1               
+   481 guard_479    B              1             1               
+   482 guard_480    B              3             1               
+   483 guard_481    NL             1             1                           1 
+   484 guard_482    B              3             1               
+   485 guard_483    NL             1             1                       < eps
+   486 guard_484    B              2             1               
+   487 guard_485    B              4             1               
+   488 guard_486    NL             1             1                       < eps
+   489 guard_487    B              2             1               
+   490 guard_488    NL             1             1                           1 
+   491 guard_489    B              3             1               
+   492 guard_490    NL             1             1                       < eps
+   493 guard_491    B              2             1               
+   494 guard_492    B              2             1               
+   495 guard_493    NL             1             1                           1 
+   496 guard_494    B              2             1               
+   497 guard_495    B              7             1               
+   498 guard_496    B              2             1               
+   499 guard_497    NL             1             1                           1 
+   500 guard_498    B              1             1               
+   501 guard_499    B              6             1               
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 x_0          NL             0             0                       < eps
+     2 x_1          NL             0             0                       < eps
+     3 x_2          B              1             0               
+     4 x_3          NL             0             0                           1 
+     5 x_4          NL             0             0                           1 
+     6 x_5          B              1             0               
+     7 x_6          NL             0             0                       < eps
+     8 x_7          NL             0             0                       < eps
+     9 x_8          NL             0             0                       < eps
+    10 x_9          NL             0             0                       < eps
+    11 x_10         NL             0             0                       < eps
+    12 x_11         B              1             0               
+    13 x_12         NL             0             0                       < eps
+    14 x_13         NL             0             0                       < eps
+    15 x_14         NL             0             0                           1 
+    16 x_15         NL             0             0                           1 
+    17 x_16         NL             0             0                           1 
+    18 x_17         NL             0             0                           1 
+    19 x_18         NL             0             0                           1 
+    20 x_19         NL             0             0                           1 
+    21 x_20         NL             0             0                           1 
+    22 x_21         NL             0             0                           1 
+    23 x_22         B              1             0               
+    24 x_23         B              0             0               
+    25 x_24         NL             0             0                       < eps
+    26 x_25         NL             0             0                           1 
+    27 x_26         NL             0             0                       < eps
+    28 x_27         NL             0             0                           1 
+    29 x_28         NL             0             0                           1 
+    30 x_29         NL             0             0                       < eps
+    31 x_30         B              0             0               
+    32 x_31         B              1             0               
+    33 x_32         NL             0             0                       < eps
+    34 x_33         B              0             0               
+    35 x_34         NL             0             0                       < eps
+    36 x_35         NL             0             0                       < eps
+    37 x_36         NL             0             0                       < eps
+    38 x_37         B              1             0               
+    39 x_38         B              0             0               
+    40 x_39         NL             0             0                       < eps
+    41 x_40         NL             0             0                       < eps
+    42 x_41         NL             0             0                       < eps
+    43 x_42         B              1             0               
+    44 x_43         NL             0             0                           1 
+    45 x_44         NL             0             0                           1 
+    46 x_45         B              1             0               
+    47 x_46         NL             0             0                       < eps
+    48 x_47         NL             0             0                       < eps
+    49 x_48         NL             0             0                       < eps
+    50 x_49         B              0             0               
+    51 x_50         NL             0             0                           1 
+    52 x_51         NL             0             0                           1 
+    53 x_52         B              1             0               
+    54 x_53         NL             0             0                           1 
+    55 x_54         NL             0             0                       < eps
+    56 x_55         NL             0             0                       < eps
+    57 x_56         NL             0             0                       < eps
+    58 x_57         B              0             0               
+    59 x_58         B              1             0               
+    60 x_59         NL             0             0                       < eps
+    61 x_60         NL             0             0                       < eps
+    62 x_61         B              0             0               
+    63 x_62         NL             0             0                       < eps
+    64 x_63         NL             0             0                           1 
+    65 x_64         NL             0             0                       < eps
+    66 x_65         NL             0             0                       < eps
+    67 x_66         NL             0             0                       < eps
+    68 x_67         B              1             0               
+    69 x_68         B              1             0               
+    70 x_69         NL             0             0                       < eps
+    71 x_70         NL             0             0                       < eps
+    72 x_71         B              0             0               
+    73 x_72         NL             0             0                           1 
+    74 x_73         NL             0             0                       < eps
+    75 x_74         NL             0             0                       < eps
+    76 x_75         NL             0             0                       < eps
+    77 x_76         NL             0             0                       < eps
+    78 x_77         NL             0             0                           1 
+    79 x_78         B              1             0               
+    80 x_79         NL             0             0                           1 
+    81 x_80         NL             0             0                       < eps
+    82 x_81         NL             0             0                           1 
+    83 x_82         NL             0             0                       < eps
+    84 x_83         NL             0             0                       < eps
+    85 x_84         B              1             0               
+    86 x_85         NL             0             0                           1 
+    87 x_86         NL             0             0                       < eps
+    88 x_87         NL             0             0                       < eps
+    89 x_88         NL             0             0                       < eps
+    90 x_89         B              1             0               
+    91 x_90         NL             0             0                       < eps
+    92 x_91         NL             0             0                           1 
+    93 x_92         NL             0             0                           1 
+    94 x_93         B              1             0               
+    95 x_94         B              0             0               
+    96 x_95         B              0             0               
+    97 x_96         B              0             0               
+    98 x_97         NL             0             0                       < eps
+    99 x_98         NL             0             0                       < eps
+   100 x_99         B              1             0               
+   101 x_100        NL             0             0                       < eps
+   102 x_101        NL             0             0                       < eps
+   103 x_102        B              0             0               
+   104 x_103        NL             0             0                       < eps
+   105 x_104        NL             0             0                       < eps
+   106 x_105        NL             0             0                       < eps
+   107 x_106        B              1             0               
+   108 x_107        NL             0             0                           1 
+   109 x_108        NL             0             0                           1 
+   110 x_109        NL             0             0                       < eps
+   111 x_110        B              1             0               
+   112 x_111        NL             0             0                       < eps
+   113 x_112        NL             0             0                       < eps
+   114 x_113        NL             0             0                       < eps
+   115 x_114        NL             0             0                           1 
+   116 x_115        NL             0             0                           1 
+   117 x_116        NL             0             0                       < eps
+   118 x_117        NL             0             0                           1 
+   119 x_118        NL             0             0                       < eps
+   120 x_119        NL             0             0                           1 
+   121 x_120        NL             0             0                       < eps
+   122 x_121        NL             0             0                       < eps
+   123 x_122        NL             0             0                       < eps
+   124 x_123        NL             0             0                           1 
+   125 x_124        B              1             0               
+   126 x_125        NL             0             0                           1 
+   127 x_126        NL             0             0                           1 
+   128 x_127        NL             0             0                       < eps
+   129 x_128        NL             0             0                           1 
+   130 x_129        B              0             0               
+   131 x_130        NL             0             0                       < eps
+   132 x_131        NL             0             0                       < eps
+   133 x_132        B              1             0               
+   134 x_133        NL             0             0                           1 
+   135 x_134        NL             0             0                           1 
+   136 x_135        NL             0             0                           1 
+   137 x_136        NL             0             0                           1 
+   138 x_137        NL             0             0                           1 
+   139 x_138        B              0             0               
+   140 x_139        NL             0             0                       < eps
+   141 x_140        NL             0             0                       < eps
+   142 x_141        NL             0             0                       < eps
+   143 x_142        NL             0             0                       < eps
+   144 x_143        B              1             0               
+   145 x_144        NL             0             0                       < eps
+   146 x_145        B              0             0               
+   147 x_146        NL             0             0                       < eps
+   148 x_147        NL             0             0                       < eps
+   149 x_148        B              1             0               
+   150 x_149        NL             0             0                           1 
+   151 x_150        NL             0             0                       < eps
+   152 x_151        NL             0             0                       < eps
+   153 x_152        NL             0             0                       < eps
+   154 x_153        B              1             0               
+   155 x_154        NL             0             0                           1 
+   156 x_155        B              0             0               
+   157 x_156        NL             0             0                           1 
+   158 x_157        NL             0             0                           1 
+   159 x_158        NL             0             0                       < eps
+   160 x_159        B              1             0               
+   161 x_160        NL             0             0                       < eps
+   162 x_161        B              0             0               
+   163 x_162        NL             0             0                       < eps
+   164 x_163        NL             0             0                       < eps
+   165 x_164        NL             0             0                       < eps
+   166 x_165        NL             0             0                       < eps
+   167 x_166        B              1             0               
+   168 x_167        B              0             0               
+   169 x_168        NL             0             0                           1 
+   170 x_169        NL             0             0                           1 
+   171 x_170        NL             0             0                           1 
+   172 x_171        NL             0             0                           1 
+   173 x_172        NL             0             0                           1 
+   174 x_173        B              1             0               
+   175 x_174        NL             0             0                       < eps
+   176 x_175        B              0             0               
+   177 x_176        NL             0             0                       < eps
+   178 x_177        NL             0             0                       < eps
+   179 x_178        B              1             0               
+   180 x_179        NL             0             0                       < eps
+   181 x_180        NL             0             0                       < eps
+   182 x_181        NL             0             0                           1 
+   183 x_182        NL             0             0                       < eps
+   184 x_183        NL             0             0                           1 
+   185 x_184        NL             0             0                           1 
+   186 x_185        NL             0             0                       < eps
+   187 x_186        NL             0             0                       < eps
+   188 x_187        B              1             0               
+   189 x_188        NL             0             0                       < eps
+   190 x_189        NL             0             0                       < eps
+   191 x_190        NL             0             0                       < eps
+   192 x_191        B              0             0               
+   193 x_192        NL             0             0                       < eps
+   194 x_193        B              1             0               
+   195 x_194        B              0             0               
+   196 x_195        NL             0             0                       < eps
+   197 x_196        NL             0             0                       < eps
+   198 x_197        B              1             0               
+   199 x_198        NL             0             0                           1 
+   200 x_199        NL             0             0                       < eps
+   201 x_200        NL             0             0                       < eps
+   202 x_201        NL             0             0                       < eps
+   203 x_202        B              0             0               
+   204 x_203        NL             0             0                       < eps
+   205 x_204        B              1             0               
+   206 x_205        NL             0             0                       < eps
+   207 x_206        NL             0             0                       < eps
+   208 x_207        B              0             0               
+   209 x_208        NL             0             0                           1 
+   210 x_209        B              0             0               
+   211 x_210        NL             0             0                           1 
+   212 x_211        NL             0             0                           1 
+   213 x_212        NL             0             0                       < eps
+   214 x_213        NL             0             0                       < eps
+   215 x_214        B              1             0               
+   216 x_215        NL             0             0                           1 
+   217 x_216        NL             0             0                           1 
+   218 x_217        NL             0             0                       < eps
+   219 x_218        NL             0             0                       < eps
+   220 x_219        NL             0             0                       < eps
+   221 x_220        B              1             0               
+   222 x_221        NL             0             0                           1 
+   223 x_222        NL             0             0                           1 
+   224 x_223        NL             0             0                       < eps
+   225 x_224        NL             0             0                       < eps
+   226 x_225        B              1             0               
+   227 x_226        NL             0             0                       < eps
+   228 x_227        NL             0             0                           1 
+   229 x_228        NL             0             0                       < eps
+   230 x_229        NL             0             0                       < eps
+   231 x_230        NL             0             0                       < eps
+   232 x_231        NL             0             0                       < eps
+   233 x_232        NL             0             0                       < eps
+   234 x_233        NL             0             0                       < eps
+   235 x_234        NL             0             0                       < eps
+   236 x_235        B              1             0               
+   237 x_236        B              1             0               
+   238 x_237        NL             0             0                       < eps
+   239 x_238        NL             0             0                       < eps
+   240 x_239        B              0             0               
+   241 x_240        NL             0             0                       < eps
+   242 x_241        NL             0             0                           1 
+   243 x_242        NL             0             0                           1 
+   244 x_243        B              1             0               
+   245 x_244        NL             0             0                       < eps
+   246 x_245        NL             0             0                       < eps
+   247 x_246        B              0             0               
+   248 x_247        B              1             0               
+   249 x_248        NL             0             0                       < eps
+   250 x_249        NL             0             0                       < eps
+   251 x_250        B              0             0               
+   252 x_251        B              0             0               
+   253 x_252        NL             0             0                       < eps
+   254 x_253        NL             0             0                       < eps
+   255 x_254        B              1             0               
+   256 x_255        NL             0             0                       < eps
+   257 x_256        NL             0             0                       < eps
+   258 x_257        NL             0             0                       < eps
+   259 x_258        NL             0             0                       < eps
+   260 x_259        NL             0             0                       < eps
+   261 x_260        NL             0             0                       < eps
+   262 x_261        B              0             0               
+   263 x_262        NL             0             0                       < eps
+   264 x_263        NL             0             0                       < eps
+   265 x_264        NL             0             0                       < eps
+   266 x_265        B              1             0               
+   267 x_266        NL             0             0                       < eps
+   268 x_267        NL             0             0                       < eps
+   269 x_268        B              0             0               
+   270 x_269        NL             0             0                       < eps
+   271 x_270        B              0             0               
+   272 x_271        NL             0             0                       < eps
+   273 x_272        NL             0             0                       < eps
+   274 x_273        NL             0             0                           1 
+   275 x_274        B              1             0               
+   276 x_275        NL             0             0                           1 
+   277 x_276        NL             0             0                           1 
+   278 x_277        NL             0             0                           1 
+   279 x_278        NL             0             0                           1 
+   280 x_279        NL             0             0                           1 
+   281 x_280        B              0             0               
+   282 x_281        B              1             0               
+   283 x_282        B              0             0               
+   284 x_283        NL             0             0                       < eps
+   285 x_284        NL             0             0                           1 
+   286 x_285        NL             0             0                       < eps
+   287 x_286        NL             0             0                       < eps
+   288 x_287        B              0             0               
+   289 x_288        NL             0             0                       < eps
+   290 x_289        NL             0             0                       < eps
+   291 x_290        B              1             0               
+   292 x_291        B              0             0               
+   293 x_292        NL             0             0                       < eps
+   294 x_293        NL             0             0                       < eps
+   295 x_294        B              1             0               
+   296 x_295        NL             0             0                       < eps
+   297 x_296        NL             0             0                           1 
+   298 x_297        NL             0             0                           1 
+   299 x_298        B              0             0               
+   300 x_299        NL             0             0                       < eps
+   301 x_300        B              1             0               
+   302 x_301        NL             0             0                           1 
+   303 x_302        NL             0             0                       < eps
+   304 x_303        NL             0             0                       < eps
+   305 x_304        NL             0             0                       < eps
+   306 x_305        NL             0             0                       < eps
+   307 x_306        B              1             0               
+   308 x_307        NL             0             0                           1 
+   309 x_308        NL             0             0                           1 
+   310 x_309        NL             0             0                           1 
+   311 x_310        NL             0             0                           1 
+   312 x_311        B              1             0               
+   313 x_312        B              0             0               
+   314 x_313        NL             0             0                       < eps
+   315 x_314        NL             0             0                           1 
+   316 x_315        NL             0             0                           1 
+   317 x_316        NL             0             0                           1 
+   318 x_317        NL             0             0                           1 
+   319 x_318        B              1             0               
+   320 x_319        NL             0             0                       < eps
+   321 x_320        NL             0             0                       < eps
+   322 x_321        NL             0             0                       < eps
+   323 x_322        B              0             0               
+   324 x_323        NL             0             0                       < eps
+   325 x_324        NL             0             0                           1 
+   326 x_325        NL             0             0                       < eps
+   327 x_326        NL             0             0                       < eps
+   328 x_327        B              1             0               
+   329 x_328        NL             0             0                       < eps
+   330 x_329        NL             0             0                       < eps
+   331 x_330        NL             0             0                       < eps
+   332 x_331        B              0             0               
+   333 x_332        NL             0             0                       < eps
+   334 x_333        B              1             0               
+   335 x_334        NL             0             0                       < eps
+   336 x_335        B              0             0               
+   337 x_336        NL             0             0                           1 
+   338 x_337        NL             0             0                           1 
+   339 x_338        B              0             0               
+   340 x_339        B              1             0               
+   341 x_340        B              0             0               
+   342 x_341        NL             0             0                       < eps
+   343 x_342        B              0             0               
+   344 x_343        B              1             0               
+   345 x_344        NL             0             0                       < eps
+   346 x_345        B              0             0               
+   347 x_346        NL             0             0                       < eps
+   348 x_347        NL             0             0                       < eps
+   349 x_348        B              0             0               
+   350 x_349        B              0             0               
+   351 x_350        NL             0             0                       < eps
+   352 x_351        NL             0             0                       < eps
+   353 x_352        B              1             0               
+   354 x_353        NL             0             0                           1 
+   355 x_354        NL             0             0                           1 
+   356 x_355        B              1             0               
+   357 x_356        NL             0             0                       < eps
+   358 x_357        NL             0             0                       < eps
+   359 x_358        NL             0             0                       < eps
+   360 x_359        NL             0             0                       < eps
+   361 x_360        B              0             0               
+   362 x_361        B              1             0               
+   363 x_362        B              0             0               
+   364 x_363        NL             0             0                       < eps
+   365 x_364        NL             0             0                       < eps
+   366 x_365        NL             0             0                       < eps
+   367 x_366        NL             0             0                       < eps
+   368 x_367        NL             0             0                       < eps
+   369 x_368        B              1             0               
+   370 x_369        NL             0             0                       < eps
+   371 x_370        NL             0             0                       < eps
+   372 x_371        NL             0             0                       < eps
+   373 x_372        NL             0             0                           1 
+   374 x_373        NL             0             0                       < eps
+   375 x_374        NL             0             0                       < eps
+   376 x_375        B              1             0               
+   377 x_376        NL             0             0                           1 
+   378 x_377        NL             0             0                           1 
+   379 x_378        NL             0             0                           1 
+   380 x_379        NL             0             0                           1 
+   381 x_380        NL             0             0                       < eps
+   382 x_381        NL             0             0                       < eps
+   383 x_382        NL             0             0                       < eps
+   384 x_383        B              1             0               
+   385 x_384        NL             0             0                           1 
+   386 x_385        NL             0             0                           1 
+   387 x_386        NL             0             0                           1 
+   388 x_387        NL             0             0                       < eps
+   389 x_388        NL             0             0                       < eps
+   390 x_389        NL             0             0                       < eps
+   391 x_390        NL             0             0                           1 
+   392 x_391        NL             0             0                           1 
+   393 x_392        NL             0             0                           1 
+   394 x_393        NL             0             0                           1 
+   395 x_394        B              1             0               
+   396 x_395        NL             0             0                           1 
+   397 x_396        NL             0             0                           1 
+   398 x_397        B              1             0               
+   399 x_398        NL             0             0                       < eps
+   400 x_399        NL             0             0                       < eps
+   401 x_400        B              0             0               
+   402 x_401        NL             0             0                           1 
+   403 x_402        NL             0             0                           1 
+   404 x_403        NL             0             0                           1 
+   405 x_404        B              1             0               
+   406 x_405        NL             0             0                       < eps
+   407 x_406        NL             0             0                       < eps
+   408 x_407        NL             0             0                           1 
+   409 x_408        NL             0             0                           1 
+   410 x_409        B              1             0               
+   411 x_410        NL             0             0                       < eps
+   412 x_411        B              0             0               
+   413 x_412        NL             0             0                           1 
+   414 x_413        B              1             0               
+   415 x_414        NL             0             0                       < eps
+   416 x_415        NL             0             0                       < eps
+   417 x_416        B              0             0               
+   418 x_417        NL             0             0                           1 
+   419 x_418        B              1             0               
+   420 x_419        NL             0             0                       < eps
+   421 x_420        NL             0             0                       < eps
+   422 x_421        NL             0             0                       < eps
+   423 x_422        B              1             0               
+   424 x_423        NL             0             0                       < eps
+   425 x_424        NL             0             0                       < eps
+   426 x_425        NL             0             0                       < eps
+   427 x_426        NL             0             0                       < eps
+   428 x_427        NL             0             0                       < eps
+   429 x_428        NL             0             0                           1 
+   430 x_429        B              1             0               
+   431 x_430        NL             0             0                           1 
+   432 x_431        NL             0             0                           1 
+   433 x_432        NL             0             0                       < eps
+   434 x_433        NL             0             0                       < eps
+   435 x_434        B              1             0               
+   436 x_435        NL             0             0                           1 
+   437 x_436        NL             0             0                           1 
+   438 x_437        B              1             0               
+   439 x_438        NL             0             0                       < eps
+   440 x_439        NL             0             0                       < eps
+   441 x_440        NL             0             0                       < eps
+   442 x_441        NL             0             0                       < eps
+   443 x_442        NL             0             0                       < eps
+   444 x_443        B              1             0               
+   445 x_444        NL             0             0                           1 
+   446 x_445        NL             0             0                       < eps
+   447 x_446        NL             0             0                       < eps
+   448 x_447        NL             0             0                       < eps
+   449 x_448        NL             0             0                       < eps
+   450 x_449        B              1             0               
+   451 x_450        NL             0             0                           1 
+   452 x_451        NL             0             0                           1 
+   453 x_452        NL             0             0                           1 
+   454 x_453        NL             0             0                           1 
+   455 x_454        NL             0             0                           1 
+   456 x_455        NL             0             0                           1 
+   457 x_456        NL             0             0                       < eps
+   458 x_457        NL             0             0                       < eps
+   459 x_458        B              1             0               
+   460 x_459        NL             0             0                           1 
+   461 x_460        NL             0             0                           1 
+   462 x_461        B              0             0               
+   463 x_462        NL             0             0                         0.5 
+   464 x_463        B              1             0               
+   465 x_464        NL             0             0                         0.5 
+   466 x_465        B              0             0               
+   467 x_466        NL             0             0                         0.5 
+   468 x_467        B              1             0               
+   469 x_468        NL             0             0                         0.5 
+   470 x_469        NL             0             0                         0.5 
+   471 x_470        B              0             0               
+   472 x_471        NL             0             0                         0.5 
+   473 x_472        B              1             0               
+   474 x_473        NL             0             0                         0.5 
+   475 x_474        NL             0             0                         0.5 
+   476 x_475        B              1             0               
+   477 x_476        NL             0             0                       < eps
+   478 x_477        NL             0             0                       < eps
+   479 x_478        NL             0             0                           1 
+   480 x_479        NL             0             0                           1 
+   481 x_480        B              0             0               
+   482 x_481        NL             0             0                       < eps
+   483 x_482        B              1             0               
+   484 x_483        NL             0             0                           1 
+   485 x_484        NL             0             0                           1 
+   486 x_485        NL             0             0                           1 
+   487 x_486        NL             0             0                           1 
+   488 x_487        B              0             0               
+   489 x_488        NL             0             0                       < eps
+   490 x_489        B              1             0               
+   491 x_490        NL             0             0                           1 
+   492 x_491        NL             0             0                           1 
+   493 x_492        B              0             0               
+   494 x_493        NL             0             0                       < eps
+   495 x_494        NL             0             0                       < eps
+   496 x_495        B              1             0               
+   497 x_496        B              1             0               
+   498 x_497        NL             0             0                       < eps
+   499 x_498        NL             0             0                       < eps
+   500 x_499        NL             0             0                           1 
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.DE: max.abs.err = 0.00e+00 on column 0
+        max.rel.err = 0.00e+00 on column 0
+        High quality
+
+KKT.DB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output
