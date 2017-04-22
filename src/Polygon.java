@@ -13,7 +13,11 @@ public class Polygon {
 
     public ArrayList<Edge> Edges;
 
+    public boolean hasDesiredSolution;
+
     private int k;
+
+    private double DESIRED_GUARD_VALUE = 0.1;       //the value to look for after glpsol solves the lp
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
     private int iterations;
@@ -29,6 +33,7 @@ public class Polygon {
         this.numVertices = numVertices;
         iterations = 0;
         long startTime, endTime;
+        hasDesiredSolution = false;
         while (true) {
             System.out.print("Generating top chain...");
             startTime = System.nanoTime();
@@ -422,9 +427,36 @@ public class Polygon {
     /**
      * Reads the file that glpsol wrote, and checks to see if glpsol assigned any values less than a certain amount to any of the vertices. 
      * If it finds that it did, it saves the polygon (text and data).
+     * Reads the 'activity' column of the second table to get the values assigned to each of the vertices
      */
     public void checkOutput(String polygonId) {
+        try {
+            BufferedReader glpsolReader = new BufferedReader(new FileReader("glpsol_out/" + polygonId + ".txt"));
+            String line = glpsolReader.readLine();
+            //read until start of first table
+            while(line.indexOf('-') != 0) {
+                line = glpsolReader.readLine();
+            }
+            line = glpsolReader.readLine();
+            //read until start of next table
+            while(line.indexOf('-') != 0) {
+                line = glpsolReader.readLine();
+            }
+            //go through each row of the table of vertex values
+            for (int i = 0; i < numVertices; i++) {
+                line = glpsolReader.readLine();
+                String[] tokens = line.split("\\s+");
+                if (Double.parseDouble(tokens[4]) <= DESIRED_GUARD_VALUE) {  //the activity column for the second table
+                    this.hasDesiredSolution = true;
+                    break;
+                } 
+            }
+            glpsolReader.close();
 
+        } catch (Exception e) {
+            System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
+        }
+       
     }
 
 }

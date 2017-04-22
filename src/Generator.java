@@ -75,8 +75,7 @@ public class Generator {
 
 
     public static void generateNewPolygon(PolygonPanel polygonPanel) {
-        currentPolygonId = UUID.randomUUID().toString();
-        polygonPanel.generate(verticesToGenerate, currentPolygonId);
+        polygonPanel.generate(verticesToGenerate);
     }
 
 

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.util.*;
 import java.io.*;
 import javax.imageio.*;
+import java.util.UUID;
 class PolygonPanel extends JPanel {
 
     Polygon polygonToDraw;
@@ -16,10 +17,30 @@ class PolygonPanel extends JPanel {
         this.polygonImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
     }
 
-    public void generate(int numVertices, String uniqueId) {
-        Polygon poly = new Polygon(numVertices, uniqueId);
-        polygonToDraw = poly;
-        this.repaint();
+    public void generate(int numVertices) {
+        while(true) {
+            try {
+                String uniqueId = UUID.randomUUID().toString();
+                Polygon poly = new Polygon(numVertices, uniqueId);
+                polygonToDraw = poly;
+
+                if (poly.hasDesiredSolution) {
+                    this.repaint();
+                    savePolygon(uniqueId);
+                }
+                else {
+                    Runtime rt = Runtime.getRuntime();
+                    Process pr = rt.exec("cmd /c del glpsol_out/" + uniqueId + ".txt");
+                    pr.waitFor();
+                    pr = rt.exec("cmd /c del lp_constraints/" + uniqueId + ".txt");
+                    pr.waitFor();
+                }
+            } catch(Exception e) {
+                System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
+            }
+            
+        }
+        
     }
 
     @Override
