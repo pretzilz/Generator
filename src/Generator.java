@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.Box;
 import java.awt.event.*;
-import java.util.UUID;
+
 public class Generator {
     //TODO add ability to save image of polygon
 
@@ -22,7 +22,7 @@ public class Generator {
     public static void setUpFrame(JFrame frame) {
         Box box = new Box(BoxLayout.Y_AXIS);
         PolygonPanel polygonPanel = new PolygonPanel();
-        polygonPanel.setMinimumSize(new Dimension(500, 250));
+        polygonPanel.setMinimumSize(new Dimension(1000, 1000));
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
@@ -36,6 +36,9 @@ public class Generator {
                     if (polygonPanel.polygonHasBeenGenerated()) {
                         polygonPanel.savePolygon(currentPolygonId);
                     }
+                }
+                if ("endRun".equals(event.getActionCommand())) {
+                    polygonPanel.stopRun();
                 }
             }
         };
@@ -67,6 +70,13 @@ public class Generator {
         savePolygon.setActionCommand("savePolygon");
         savePolygon.addActionListener(listener);
         buttonPane.add(savePolygon);
+
+        JButton endRun = new JButton("End Run");
+        endRun.setVerticalTextPosition(AbstractButton.CENTER);
+        endRun.setHorizontalTextPosition(AbstractButton.LEADING);
+        endRun.setActionCommand("endRun");
+        endRun.addActionListener(listener);
+        buttonPane.add(endRun);
 
         box.add(buttonPane);
         frame.add(box);

@@ -12,6 +12,8 @@ class PolygonPanel extends JPanel {
     Polygon polygonToDraw;
     private BufferedImage polygonImage;
 
+    public boolean continueRunning = true;
+
     public PolygonPanel() {
         this.polygonToDraw = null;
         this.polygonImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
@@ -20,27 +22,27 @@ class PolygonPanel extends JPanel {
     public void generate(int numVertices) {
         //EventQueue.invokeLater(new Runnable() {
             //public void run() {
-                long polygonId = 0;
-                while(true) {
+                long polygonIndex = 0;
+                while(continueRunning) {
                     try {
-                        //String polygonId = UUID.randomUUID().toString();
-                        Polygon poly = new Polygon(numVertices, Long.toString(polygonId));
+                        String polygonId = UUID.randomUUID().toString();
+                        Polygon poly = new Polygon(numVertices, polygonId);
                         polygonToDraw = poly;
 
                         if (poly.hasDesiredSolution) {
                             repaint();
-                            savePolygon(Long.toString(polygonId));
+                            savePolygon(polygonId);
                         }
                         else {
-                            ProcessBuilder pr = new ProcessBuilder("cmd", "/c del glpsol_out\\" + Long.toString(polygonId) + ".txt");
+                            ProcessBuilder pr = new ProcessBuilder("cmd", "/c del glpsol_out\\" + polygonId + ".txt");
                             Process p = pr.start();
                             p.waitFor();
-                            pr = new ProcessBuilder("cmd", "/c del lp_constraints\\" + Long.toString(polygonId) + ".txt");
+                            pr = new ProcessBuilder("cmd", "/c del lp_constraints\\" + polygonId + ".txt");
                             p = pr.start();
                             p.waitFor();
                         }
 
-                        polygonId++;
+                        polygonIndex++;
                     } catch(Exception e) {
                         System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
                     }
@@ -48,6 +50,10 @@ class PolygonPanel extends JPanel {
             //}
         //});
         
+    }
+
+    public void stopRun() {
+        continueRunning = false;
     }
 
     @Override
