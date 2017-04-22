@@ -20,6 +20,9 @@ public class Polygon {
     private double DESIRED_GUARD_VALUE = 0.1;       //the value to look for after glpsol solves the lp
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
+
+    private static boolean VERBOSE_OUTPUT = false;
+
     private int iterations;
     /**
      * Generates a polygon. Attempts to make one in MAX_ITERATIONS iterations, and if it can't, it starts over.
@@ -32,21 +35,33 @@ public class Polygon {
         this.Edges = new ArrayList<Edge>();
         this.numVertices = numVertices;
         iterations = 0;
-        long startTime, endTime;
+        long startTime = System.nanoTime();
+        long endTime = System.nanoTime();
         hasDesiredSolution = false;
         while (true) {
-            System.out.print("Generating top chain...");
-            startTime = System.nanoTime();
-            generateTopChain();     
-            endTime = System.nanoTime();
-            System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
-            System.out.print("Generating bottom chain...");
-            startTime = System.nanoTime();
+            if (VERBOSE_OUTPUT) {
+                System.out.print("Generating top chain..."); 
+                startTime = System.nanoTime();
+            }
+
+            generateTopChain();  
+
+            if (VERBOSE_OUTPUT) {
+                endTime = System.nanoTime();
+                System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+                System.out.print("Generating bottom chain...");
+                startTime = System.nanoTime();
+            }   
+           
             generateBottomChain();
-            endTime = System.nanoTime();
-           System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+
+            if (VERBOSE_OUTPUT) {
+                endTime = System.nanoTime();
+                System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+            }
+
             if (iterations == MAX_ITERATIONS) { //try again
-                System.out.println("Generation failed. Trying again...");
+                if (VERBOSE_OUTPUT) { System.out.println("Generation failed. Trying again..."); }
                 iterations = 0;
                 this.Vertices = new ArrayList<Vertex>();
                 this.TopChain = new ArrayList<Vertex>();
@@ -59,23 +74,35 @@ public class Polygon {
         }
         Collections.sort(this.Vertices);    //sort all the vertices by x value
 
-        System.out.print("Generating constraints...");
-        startTime = System.nanoTime();
+        if (VERBOSE_OUTPUT) {
+            System.out.print("Generating constraints...");
+            startTime = System.nanoTime();
+        }
+        
         generateLPConstraints(uniqueId);   //generates the file to send to glpsol
-        endTime = System.nanoTime();
-        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
 
-        System.out.print("Solving linear program...");
-        startTime = System.nanoTime();
+        if (VERBOSE_OUTPUT) {
+            endTime = System.nanoTime();
+            System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+            System.out.print("Solving linear program...");
+            startTime = System.nanoTime();
+        }
+       
         solveLP(uniqueId);
-        endTime = System.nanoTime();
-        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
 
-        System.out.print("Checking output...");
-        startTime = System.nanoTime();
+        if (VERBOSE_OUTPUT) {
+            endTime = System.nanoTime();
+            System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n");
+            System.out.print("Checking output...");
+            startTime = System.nanoTime();
+        }
+        
         checkOutput(uniqueId);
-        endTime = System.nanoTime();
-        System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n\n");
+
+        if (VERBOSE_OUTPUT) {
+            endTime = System.nanoTime();
+            System.out.print("done. (" + (endTime - startTime)/1000000 + "ms)\n\n");
+        }
     }
 
     /**
@@ -412,12 +439,13 @@ public class Polygon {
         try {
             //create the output folder, first.
             boolean folderCreated = new File("glpsol_out/").mkdir();
-            Runtime runtime = Runtime.getRuntime();
             ProcessBuilder glpsolProcess = new ProcessBuilder("cmd", "/c glpsol --model lp_constraints/" + polygonId + ".txt --output glpsol_out/" + polygonId + ".txt");
-            glpsolProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-            glpsolProcess.redirectError(ProcessBuilder.Redirect.INHERIT);
+            if (VERBOSE_OUTPUT) {
+                glpsolProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+                glpsolProcess.redirectError(ProcessBuilder.Redirect.INHERIT);
+                System.out.println();
+            }
             Process p = glpsolProcess.start();
-            System.out.println();
             p.waitFor();
         } catch (Exception e) {
             System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
@@ -446,7 +474,7 @@ public class Polygon {
             for (int i = 0; i < numVertices; i++) {
                 line = glpsolReader.readLine();
                 String[] tokens = line.split("\\s+");
-                if (Double.parseDouble(tokens[4]) <= DESIRED_GUARD_VALUE) {  //the activity column for the second table
+                if (Double.parseDouble(tokens[4]) <= DESIRED_GUARD_VALUE && Double.parseDouble(tokens[4]) > 0) {  //the activity column for the second table
                     this.hasDesiredSolution = true;
                     break;
                 } 

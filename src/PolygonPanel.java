@@ -18,36 +18,43 @@ class PolygonPanel extends JPanel {
     }
 
     public void generate(int numVertices) {
-        while(true) {
-            try {
-                String uniqueId = UUID.randomUUID().toString();
-                Polygon poly = new Polygon(numVertices, uniqueId);
-                polygonToDraw = poly;
+        //EventQueue.invokeLater(new Runnable() {
+            //public void run() {
+                long polygonId = 0;
+                while(true) {
+                    try {
+                        //String polygonId = UUID.randomUUID().toString();
+                        Polygon poly = new Polygon(numVertices, Long.toString(polygonId));
+                        polygonToDraw = poly;
 
-                if (poly.hasDesiredSolution) {
-                    this.repaint();
-                    savePolygon(uniqueId);
+                        if (poly.hasDesiredSolution) {
+                            repaint();
+                            savePolygon(Long.toString(polygonId));
+                        }
+                        else {
+                            ProcessBuilder pr = new ProcessBuilder("cmd", "/c del glpsol_out\\" + Long.toString(polygonId) + ".txt");
+                            Process p = pr.start();
+                            p.waitFor();
+                            pr = new ProcessBuilder("cmd", "/c del lp_constraints\\" + Long.toString(polygonId) + ".txt");
+                            p = pr.start();
+                            p.waitFor();
+                        }
+
+                        polygonId++;
+                    } catch(Exception e) {
+                        System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
+                    }
                 }
-                else {
-                    Runtime rt = Runtime.getRuntime();
-                    Process pr = rt.exec("cmd /c del glpsol_out/" + uniqueId + ".txt");
-                    pr.waitFor();
-                    pr = rt.exec("cmd /c del lp_constraints/" + uniqueId + ".txt");
-                    pr.waitFor();
-                }
-            } catch(Exception e) {
-                System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
-            }
-            
-        }
+            //}
+        //});
         
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        polygonImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
-        Graphics g = polygonImage.createGraphics();
+        this.polygonImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = this.polygonImage.createGraphics();
         drawPolygon(g);
         graphics.drawImage(polygonImage, 0, 0, null);
         g.dispose();
