@@ -21,7 +21,7 @@ public class Generator {
     public static void setUpFrame(JFrame frame) {
         Box box = new Box(BoxLayout.Y_AXIS);
         PolygonPanel polygonPanel = new PolygonPanel();
-        polygonPanel.setMinimumSize(new Dimension(1000, 1000));
+        polygonPanel.setMinimumSize(new Dimension(2000, 2000));
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
