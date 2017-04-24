@@ -17,7 +17,7 @@ public class Polygon {
 
     private int k;
 
-    private double DESIRED_GUARD_VALUE = 1;       //the value to look for after glpsol solves the lp
+    private double DESIRED_GUARD_VALUE = 0.1;       //the value to look for after glpsol solves the lp
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
 

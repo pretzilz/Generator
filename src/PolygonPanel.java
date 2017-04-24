@@ -12,6 +12,8 @@ class PolygonPanel extends JPanel {
     public Polygon polygonToDraw;
     private BufferedImage polygonImage;
 
+    private Thread runnerThread;
+
     public boolean continueRunning = true;
 
     public PolygonPanel() {
@@ -20,12 +22,13 @@ class PolygonPanel extends JPanel {
     }
 
     public void generate(int numVertices) {
-        Thread runnerThread = new Thread(new ExperimentRunner(this, numVertices));
+        this.continueRunning = true;
+        runnerThread = new Thread(new ExperimentRunner(this, numVertices));
         runnerThread.start();
     }
 
     public void stopRun() {
-        continueRunning = false;
+        this.continueRunning = false;
     }
 
     @Override

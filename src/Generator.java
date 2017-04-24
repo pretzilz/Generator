@@ -25,16 +25,11 @@ public class Generator {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if ("generateNew".equals(event.getActionCommand())) {
-                    generateNewPolygon(polygonPanel);
+                    polygonPanel.generate(verticesToGenerate);
                 }
                 if ("setVertices".equals(event.getActionCommand())) {
                     String vertices = (String)JOptionPane.showInputDialog(frame, "Vertices:", "Vertices", JOptionPane.PLAIN_MESSAGE, null, null, verticesToGenerate);
                     verticesToGenerate = Integer.parseInt(vertices);
-                }
-                if ("savePolygon".equals(event.getActionCommand())) {
-                    if (polygonPanel.polygonHasBeenGenerated()) {
-                        polygonPanel.savePolygon(currentPolygonId);
-                    }
                 }
                 if ("endRun".equals(event.getActionCommand())) {
                     polygonPanel.stopRun();
@@ -47,7 +42,7 @@ public class Generator {
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 
-        JButton generateNew = new JButton("Generate new polygon");
+        JButton generateNew = new JButton("Run Generator");
         generateNew.setVerticalTextPosition(AbstractButton.CENTER);
         generateNew.setHorizontalTextPosition(AbstractButton.LEADING);
         generateNew.setActionCommand("generateNew");
@@ -63,14 +58,6 @@ public class Generator {
         buttonPane.add(setVertices);
         buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        JButton savePolygon = new JButton("Save polygon");
-        savePolygon.setVerticalTextPosition(AbstractButton.CENTER);
-        savePolygon.setHorizontalTextPosition(AbstractButton.LEADING);
-        savePolygon.setActionCommand("savePolygon");
-        savePolygon.addActionListener(listener);
-        buttonPane.add(savePolygon);
-        buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
-
         JButton endRun = new JButton("End Run");
         endRun.setVerticalTextPosition(AbstractButton.CENTER);
         endRun.setHorizontalTextPosition(AbstractButton.LEADING);
@@ -82,11 +69,5 @@ public class Generator {
         frame.add(box);
         frame.setMinimumSize(new Dimension(500, 400));
     }
-
-
-    public static void generateNewPolygon(PolygonPanel polygonPanel) {
-        polygonPanel.generate(verticesToGenerate);
-    }
-
 
 }

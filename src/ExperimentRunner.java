@@ -16,21 +16,16 @@ public class ExperimentRunner implements Runnable {
         this.panel = panel;
         this.numVertices = numVertices;
     }
+    
     public void run() {
         long polygonIndex = 0;
-        //while(true) {
+        while(panel.continueRunning) {
             try {
                 String polygonId = UUID.randomUUID().toString();
                 Polygon poly = new Polygon(numVertices, polygonId);
                 panel.polygonToDraw = poly;
-                // ActionListener savePolygonDrawing = new ActionListener() {
-                //     public void actionPerformed(ActionEvent evt) {
-                //         panel.savePolygon(polygonId);
-                //     }
-                // };
+                panel.repaint();
                 if (poly.hasDesiredSolution) {
-                    panel.repaint();
-                    //Timer timer = new Timer(1000, savePolygonDrawing).start();
                     panel.savePolygon(polygonId);
                 }
                 else {
@@ -46,6 +41,7 @@ public class ExperimentRunner implements Runnable {
             } catch(Exception e) {
                 System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
             }
-        //}
+        }
+        System.out.println("Generated " + polygonIndex + " polygons.");
     }
 }
