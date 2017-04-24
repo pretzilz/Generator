@@ -4,7 +4,6 @@ import java.io.*;
 import java.lang.*;
 public class Polygon {
     //TODO make y & x point generation some kind of function?
-    //TODO fix problem where whole top chain is below the bottom chain
     public ArrayList<Vertex> Vertices;
     public int numVertices;
 
@@ -21,7 +20,7 @@ public class Polygon {
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
 
-    private static boolean VERBOSE_OUTPUT = false;
+    private static boolean VERBOSE_OUTPUT = true;
 
     private int iterations;
     /**

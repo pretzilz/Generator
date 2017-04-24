@@ -16,13 +16,13 @@ public class ExperimentRunner implements Runnable {
         this.panel = panel;
         this.numVertices = numVertices;
     }
-    
+
     public void run() {
         long polygonIndex = 0;
         while(panel.continueRunning) {
             try {
                 String polygonId = UUID.randomUUID().toString();
-                Polygon poly = new Polygon(numVertices, polygonId);
+                Polygon poly = new Polygon(this.numVertices, polygonId);
                 panel.polygonToDraw = poly;
                 panel.repaint();
                 if (poly.hasDesiredSolution) {
