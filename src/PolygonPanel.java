@@ -9,7 +9,7 @@ import javax.imageio.*;
 import java.util.UUID;
 class PolygonPanel extends JPanel {
 
-    Polygon polygonToDraw;
+    public Polygon polygonToDraw;
     private BufferedImage polygonImage;
 
     public boolean continueRunning = true;
@@ -20,36 +20,8 @@ class PolygonPanel extends JPanel {
     }
 
     public void generate(int numVertices) {
-        //EventQueue.invokeLater(new Runnable() {
-            //public void run() {
-                long polygonIndex = 0;
-                while(continueRunning) {
-                    try {
-                        String polygonId = UUID.randomUUID().toString();
-                        Polygon poly = new Polygon(numVertices, polygonId);
-                        polygonToDraw = poly;
-
-                        if (poly.hasDesiredSolution) {
-                            repaint();
-                            savePolygon(polygonId);
-                        }
-                        else {
-                            ProcessBuilder pr = new ProcessBuilder("cmd", "/c del glpsol_out\\" + polygonId + ".txt");
-                            Process p = pr.start();
-                            p.waitFor();
-                            pr = new ProcessBuilder("cmd", "/c del lp_constraints\\" + polygonId + ".txt");
-                            p = pr.start();
-                            p.waitFor();
-                        }
-
-                        polygonIndex++;
-                    } catch(Exception e) {
-                        System.out.println("¯\\_(ツ)_/¯ \n" + e.getMessage());
-                    }
-                }
-            //}
-        //});
-        
+        Thread runnerThread = new Thread(new ExperimentRunner(this, numVertices));
+        runnerThread.start();
     }
 
     public void stopRun() {

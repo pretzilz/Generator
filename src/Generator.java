@@ -5,7 +5,6 @@ import javax.swing.Box;
 import java.awt.event.*;
 
 public class Generator {
-    //TODO add ability to save image of polygon
 
     public static int verticesToGenerate = 10;
 
@@ -70,6 +69,7 @@ public class Generator {
         savePolygon.setActionCommand("savePolygon");
         savePolygon.addActionListener(listener);
         buttonPane.add(savePolygon);
+        buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
 
         JButton endRun = new JButton("End Run");
         endRun.setVerticalTextPosition(AbstractButton.CENTER);
