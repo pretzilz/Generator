@@ -24,8 +24,8 @@ public class ExperimentRunner implements Runnable {
                 String polygonId = UUID.randomUUID().toString();
                 Polygon poly = new Polygon(this.numVertices, polygonId);
                 panel.polygonToDraw = poly;
-                panel.repaint();
                 if (poly.hasDesiredSolution) {
+                    panel.repaint();
                     panel.savePolygon(polygonId);
                 }
                 else {

@@ -1,0 +1,73 @@
+Problem:    4c43d537
+Rows:       21
+Columns:    20
+Non-zeros:  218
+Status:     OPTIMAL
+Objective:  vertex_guard = 2.25 (MINimum)
+
+   No.   Row name   St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 vertex_guard B           2.25                             
+     2 guard_0      NL             1             1                       < eps
+     3 guard_1      NL             1             1                        0.25 
+     4 guard_2      B              1             1               
+     5 guard_3      NL             1             1                        0.75 
+     6 guard_4      B           1.25             1               
+     7 guard_5      B              1             1               
+     8 guard_6      B            1.5             1               
+     9 guard_7      B           1.75             1               
+    10 guard_8      B           1.75             1               
+    11 guard_9      NL             1             1                        0.25 
+    12 guard_10     NL             1             1                        0.25 
+    13 guard_11     B              1             1               
+    14 guard_12     B              1             1               
+    15 guard_13     B              1             1               
+    16 guard_14     B           1.25             1               
+    17 guard_15     B            1.5             1               
+    18 guard_16     NL             1             1                         0.5 
+    19 guard_17     B              1             1               
+    20 guard_18     B            1.5             1               
+    21 guard_19     NL             1             1                        0.25 
+
+   No. Column name  St   Activity     Lower bound   Upper bound    Marginal
+------ ------------ -- ------------- ------------- ------------- -------------
+     1 x_0          NL             0             0                        0.75 
+     2 x_1          B            0.5             0               
+     3 x_2          NL             0             0                       < eps
+     4 x_3          B           0.25             0               
+     5 x_4          NL             0             0                       < eps
+     6 x_5          NL             0             0                       < eps
+     7 x_6          B           0.25             0               
+     8 x_7          NL             0             0                        0.25 
+     9 x_8          B           0.25             0               
+    10 x_9          NL             0             0                        0.25 
+    11 x_10         NL             0             0                         0.5 
+    12 x_11         NL             0             0                        0.25 
+    13 x_12         NL             0             0                        0.25 
+    14 x_13         NL             0             0                         0.5 
+    15 x_14         NL             0             0                        0.25 
+    16 x_15         B            0.5             0               
+    17 x_16         NL             0             0                         0.5 
+    18 x_17         B           0.25             0               
+    19 x_18         B           0.25             0               
+    20 x_19         NL             0             0                         0.5 
+
+Karush-Kuhn-Tucker optimality conditions:
+
+KKT.PE: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.PB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+KKT.DE: max.abs.err = 0.00e+00 on column 0
+        max.rel.err = 0.00e+00 on column 0
+        High quality
+
+KKT.DB: max.abs.err = 0.00e+00 on row 0
+        max.rel.err = 0.00e+00 on row 0
+        High quality
+
+End of output

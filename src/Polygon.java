@@ -16,11 +16,11 @@ public class Polygon {
 
     private int k;
 
-    private double DESIRED_GUARD_VALUE = 0.1;       //the value to look for after glpsol solves the lp
+    private double DESIRED_GUARD_VALUE = 0.25;       //the value to look for after glpsol solves the lp
 
     private static final int MAX_ITERATIONS = 5000; //to break the loop in case it gets stuck.
 
-    private static boolean VERBOSE_OUTPUT = true;
+    private static boolean VERBOSE_OUTPUT = false;
 
     private int iterations;
     /**
@@ -112,11 +112,21 @@ public class Polygon {
         int xStart = 0;
         Random rand = new Random();
         k = (2*numVertices/10) + rand.nextInt(((8*numVertices)/10) - ((2*numVertices)/10)); //currently ensures that it generates something hopefully not the boundaries
+        int firstY = 0;
         //compute the top chain
         for(int topChainIndex = 0; topChainIndex < k; topChainIndex++){
             //x coordinate is some random "normally distributed" amount to the right of the previous one
             int xVal = (int)Math.abs(Math.round(40 * rand.nextGaussian()) + 1);
-            int yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
+            int yVal;
+            if (topChainIndex == 1) {   //force the second point to be above the first one
+                yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian())) + firstY;
+            }
+            else {
+                yVal = (int)Math.abs(Math.round(150 * rand.nextGaussian()));
+            }
+            if (topChainIndex == 0) {
+                firstY = yVal;
+            }
             Vertex newVertex = new Vertex(xStart + xVal, yVal, true);
             xStart += xVal;
             Vertices.add(newVertex);
