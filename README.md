@@ -1,5 +1,5 @@
-# mpvga-sim
-_Monotone Polygon Vertex Guard Approximation Simulator_
+# mpvga-gen
+_Monotone Polygon and Vertex Guard Approximation Generator_
 
 This program, written in java, will generate a random monotone polygon with a set amount of vertices.
 Then, it will take that polygon and generate a set of linear program constraints that satisfies the vertex guard problem.
